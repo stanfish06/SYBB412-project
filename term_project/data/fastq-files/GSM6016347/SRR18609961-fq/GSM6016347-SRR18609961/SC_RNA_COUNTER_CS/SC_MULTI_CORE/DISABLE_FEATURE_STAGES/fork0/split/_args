@@ -1,0 +1,27 @@
+{
+    "disable_count": false,
+    "disable_multi": true,
+    "in_disable_targeted": true,
+    "is_pd": false,
+    "multi_graph": null,
+    "sample_def": [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/scratch/pbsjobs/job.18703648.hpc/SRR18609961_fastqs-folder",
+            "sample_indices": [
+                "any"
+            ],
+            "sample_names": [
+                "SRR18609961"
+            ],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null
+        }
+    ],
+    "sample_outs": {}
+}

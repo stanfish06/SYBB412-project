@@ -1,0 +1,5 @@
+@include "rna/_cr_lib_stages.mro"
+
+call WRITE_GENE_INDEX(
+    reference_path = "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+)

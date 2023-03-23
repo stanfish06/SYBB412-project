@@ -1,0 +1,8 @@
+{
+    "__mem_gb": 8,
+    "__threads": 1,
+    "__vmem_gb": 11,
+    "barcodes_under_tissue": null,
+    "corrected_barcode_counts": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/join-u2b3c1820f4/files/correct_barcode_counts.bcc.bincode",
+    "rps_limit": null
+}

@@ -1,0 +1,21 @@
+{
+    "assemblable_reads_per_bc": null,
+    "barcode_support": null,
+    "barcodes_in_chunks": null,
+    "contig_annotations": null,
+    "contig_bam": null,
+    "contig_bam_bai": null,
+    "corrected_barcode_counts": null,
+    "gem_groups": null,
+    "n50_n50_rpu": null,
+    "processed_read_pairs": null,
+    "raw_barcode_counts": null,
+    "read_shards": null,
+    "report": null,
+    "sequencing_metrics": null,
+    "summary": null,
+    "summary_tsv": null,
+    "total_read_pairs": null,
+    "umi_summary_tsv": null,
+    "unmapped_sample_fastq": null
+}

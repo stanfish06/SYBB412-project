@@ -1,0 +1,55 @@
+{
+    "count": 13,
+    "size": 11943508299,
+    "timestamp": "2023-03-20 03:51:25",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u07f61804c2/files/bc_correct_summary.bcm.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u07f61804c2/files/chunk_hist.msh.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u07f61804c2/files/chunk_summary.msm.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u07f61804c2/files/feature_counts.fbc.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u07f61804b9/files/sequencing_metrics.smf.json",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u07f61804c2/files/invalid.shard",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u07f61804b9/files/barcode_counts.bcc.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u07f61804b9/files/barcode_segment_counts.bsc.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u07f61804b9/files/bc_correct_summary.bcm.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u07f61804c2/files/valid.shard",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u07f61804b9/files/feature_counts.fbc.bincode",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u07f61804b9/files/summary.json",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/split-u07f61804b9/files/feature_reference.frf.bincode"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T03:01:13-04:00",
+            "DeltaBytes": 5847983
+        },
+        {
+            "Timestamp": "2023-03-20T03:01:22-04:00",
+            "DeltaBytes": 11915996628
+        },
+        {
+            "Timestamp": "2023-03-20T03:10:58-04:00",
+            "DeltaBytes": 21700620
+        },
+        {
+            "Timestamp": "2023-03-20T03:10:59.090009017-04:00",
+            "DeltaBytes": -21685992
+        },
+        {
+            "Timestamp": "2023-03-20T03:11:34.099083102-04:00",
+            "DeltaBytes": -1159353599
+        },
+        {
+            "Timestamp": "2023-03-20T03:46:34.826604124-04:00",
+            "DeltaBytes": -10756629063
+        },
+        {
+            "Timestamp": "2023-03-20T03:46:40.879567256-04:00",
+            "DeltaBytes": -1867
+        },
+        {
+            "Timestamp": "2023-03-20T03:51:25.132192548-04:00",
+            "DeltaBytes": -5837778
+        }
+    ]
+}

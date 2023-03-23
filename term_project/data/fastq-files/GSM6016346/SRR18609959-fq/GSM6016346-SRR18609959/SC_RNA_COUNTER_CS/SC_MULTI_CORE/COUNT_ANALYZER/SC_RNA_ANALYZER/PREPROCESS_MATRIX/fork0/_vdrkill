@@ -1,0 +1,28 @@
+{
+    "count": 2,
+    "size": 4759818,
+    "timestamp": "2023-03-20 04:25:58",
+    "paths": [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u5643181826/files/cloupe_matrix_h5.h5",
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u5643181826/files/preprocessed_matrix_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T04:24:06-04:00",
+            "DeltaBytes": 7111
+        },
+        {
+            "Timestamp": "2023-03-20T04:24:07-04:00",
+            "DeltaBytes": 4768294
+        },
+        {
+            "Timestamp": "2023-03-20T04:24:10.81035403-04:00",
+            "DeltaBytes": -2528485
+        },
+        {
+            "Timestamp": "2023-03-20T04:25:58.701101017-04:00",
+            "DeltaBytes": -2231333
+        }
+    ]
+}

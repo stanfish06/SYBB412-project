@@ -1,0 +1,22 @@
+{
+    "__mem_gb": 4.6,
+    "__threads": 1,
+    "__vmem_gb": 7.6,
+    "barcode_correction_csv": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/ALIGN_AND_COUNT/fork0/join-u2b3c182123/files/barcode_summary.csv",
+    "chemistry_description": "Single Cell 5' PE",
+    "config": {
+        "cell_barcodes": null,
+        "disable_ab_aggregate_detection": false,
+        "force_cells": null,
+        "override_library_types": null,
+        "override_mode": null,
+        "recovered_cells": null
+    },
+    "gem_groups": [
+        1
+    ],
+    "is_antibody_only": false,
+    "matrices_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/WRITE_H5_MATRIX/fork0/chnk0-u2b3c182870/files/raw_feature_bc_matrix.h5",
+    "reference_path": "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+    "sample_id": "GSM6016347-SRR18609962"
+}

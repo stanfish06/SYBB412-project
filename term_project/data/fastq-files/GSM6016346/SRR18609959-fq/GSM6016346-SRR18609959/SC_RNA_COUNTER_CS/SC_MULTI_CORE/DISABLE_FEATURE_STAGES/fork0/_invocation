@@ -1,0 +1,25 @@
+@include "rna/_common_stages.mro"
+
+call DISABLE_FEATURE_STAGES(
+    sample_def          = [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/scratch/pbsjobs/job.18703647.hpc/SRR18609959_fastqs-folder",
+            "sample_indices": ["any"],
+            "sample_names": ["SRR18609959"],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null,
+        },
+    ],
+    disable_multi       = true,
+    disable_count       = false,
+    is_pd               = false,
+    in_disable_targeted = true,
+    sample_outs         = {},
+    multi_graph         = null,
+)

@@ -1,0 +1,8 @@
+@include "rna/_sc_multi_defs.mro"
+
+call _MAKE_VDJ_CONFIG(
+    vdj_t_input        = null,
+    vdj_b_input        = null,
+    disable_vdj        = true,
+    vdj_reference_path = null,
+)

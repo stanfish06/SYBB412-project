@@ -1,0 +1,4 @@
+{
+    "clusters_csv": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/MERGE_CLUSTERS/fork0/chnk0-u2b3c1828c9/files/clusters_csv",
+    "clusters_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/MERGE_CLUSTERS/fork0/chnk0-u2b3c1828c9/files/clusters_h5.h5"
+}

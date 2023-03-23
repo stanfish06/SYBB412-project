@@ -1,0 +1,15 @@
+{
+  "chunks": [
+    {
+      "__mem_gb": 1,
+      "__threads": 4,
+      "__vmem_gb": null,
+      "sample": "non_multiplexed"
+    }
+  ],
+  "join": {
+    "__mem_gb": 4,
+    "__threads": 4,
+    "__vmem_gb": null
+  }
+}

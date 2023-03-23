@@ -1,0 +1,45 @@
+@include "rna/_cr_lib_stages.mro"
+
+call WRITE_H5_MATRIX(
+    gem_well          = 1,
+    counts            = [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/ALIGN_AND_COUNT/fork0/chnk0-u093d182388/files/bc_sort.csf",
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/ALIGN_AND_COUNT/fork0/chnk1-u093d182388/files/bc_sort.csf",
+    ],
+    feature_reference = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/split-u093d1821b4/files/feature_reference.frf.bincode",
+    chemistry_def     = {
+        barcode: [
+            {
+                kind:      "gel_bead",
+                length:    16,
+                offset:    0,
+                read_type: "R1",
+                whitelist: "737K-august-2016",
+            },
+        ],
+        description:  "Single Cell 5' PE",
+        endedness:    "five_prime",
+        name:         "SC5P-PE",
+        rna: {
+            length:     null,
+            min_length: null,
+            offset:     26,
+            read_type:  "R1",
+        },
+        rna2: {
+            length:     null,
+            min_length: null,
+            offset:     0,
+            read_type:  "R2",
+        },
+        strandedness: "+",
+        umi: {
+            length:     10,
+            min_length: null,
+            offset:     16,
+            read_type:  "R1",
+        },
+    },
+    sample_id         = "GSM6016346-SRR18609960",
+    barcode_index     = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/WRITE_BARCODE_INDEX/fork0/chnk0-u093d182386/files/barcode_index.bi.bincode",
+)

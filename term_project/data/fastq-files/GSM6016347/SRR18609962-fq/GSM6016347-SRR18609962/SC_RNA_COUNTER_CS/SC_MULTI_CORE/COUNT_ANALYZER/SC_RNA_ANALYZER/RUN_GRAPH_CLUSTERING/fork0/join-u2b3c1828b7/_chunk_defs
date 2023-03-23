@@ -1,0 +1,10 @@
+[
+    {
+        "k_nearest": 200,
+        "neighbor_index": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u2b3c1828b7/files/neighbor_index.pickle",
+        "row_start": 0,
+        "submatrix": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u2b3c1828b7/files/0_submatrix.h5",
+        "total_rows": 3852,
+        "use_bcs": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u2b3c1828b7/files/use_bcs.h5"
+    }
+]

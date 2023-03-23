@@ -1,0 +1,18 @@
+[stdout]
+load	self_premaxrss_mb	105.5
+load	children_premaxrss_mb	105.5
+Martian runtime detected. Try Num. = 1
+load	self_postmaxrss_mb	111.6
+load	children_postmaxrss_mb	31.5
+load	elapsed_sec	0
+nn_build	self_premaxrss_mb	111.6
+nn_build	children_premaxrss_mb	111.6
+nn_build	self_postmaxrss_mb	111.6
+nn_build	children_postmaxrss_mb	31.5
+nn_build	elapsed_sec	0
+Using 113 neighbors
+chunk_pca	self_premaxrss_mb	111.6
+chunk_pca	children_premaxrss_mb	111.6
+chunk_pca	self_postmaxrss_mb	111.6
+chunk_pca	children_postmaxrss_mb	31.5
+chunk_pca	elapsed_sec	0

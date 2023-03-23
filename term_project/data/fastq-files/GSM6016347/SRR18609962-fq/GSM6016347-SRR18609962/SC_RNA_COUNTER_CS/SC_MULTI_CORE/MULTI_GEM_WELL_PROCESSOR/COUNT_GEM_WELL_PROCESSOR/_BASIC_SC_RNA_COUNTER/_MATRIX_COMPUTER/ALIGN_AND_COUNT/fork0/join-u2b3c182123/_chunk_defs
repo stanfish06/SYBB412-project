@@ -1,0 +1,39 @@
+[
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "TAGCCGGGTTCCTTTT",
+                "valid": false
+            },
+            "start": null
+        },
+        "read_ann_subsample_rate": 0.9812995791435242
+    },
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "CGGACTGCACCGATAT",
+                "valid": true
+            },
+            "start": {
+                "gem_group": 1,
+                "sequence": "TAGCCGGGTTCCTTTT",
+                "valid": false
+            }
+        },
+        "read_ann_subsample_rate": 0.9812995791435242
+    },
+    {
+        "range": {
+            "end": null,
+            "start": {
+                "gem_group": 1,
+                "sequence": "CGGACTGCACCGATAT",
+                "valid": true
+            }
+        },
+        "read_ann_subsample_rate": 0.9812995791435242
+    }
+]

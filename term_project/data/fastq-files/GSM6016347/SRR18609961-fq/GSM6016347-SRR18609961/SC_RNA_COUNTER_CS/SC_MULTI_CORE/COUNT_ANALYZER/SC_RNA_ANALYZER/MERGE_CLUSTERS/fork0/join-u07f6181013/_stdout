@@ -1,0 +1,23 @@
+[stdout]
+(19827, 4519) 5289362
+Martian runtime detected. Try Num. = 1
+(4519, 10)
+210880
+[849 687 587 496 451 382 339 270 241 217]
+max=9
+Comparing clusters (4.0,6.0)
+	Computing params on (19827, 878) matrix
+	Running DE on 496 vs 382 cells
+Comparing clusters (5.0,10.0)
+	Computing params on (19827, 668) matrix
+	Running DE on 451 vs 217 cells
+Comparing clusters (1.0,3.0)
+	Computing params on (19827, 1436) matrix
+	Running DE on 849 vs 587 cells
+	Found 0 DE genes. Merging clusters (1.0,3.0)
+308176
+[1436  687  496  451  382  339  270  241  217]
+max=8
+Comparing clusters (1.0,9.0)
+	Computing params on (19827, 1653) matrix
+	Running DE on 1436 vs 217 cells

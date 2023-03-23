@@ -1,0 +1,10 @@
+{
+    "bait_fasta": null,
+    "disable_target_umi_filter": true,
+    "disable_targeted": true,
+    "rps_limit": null,
+    "summary": null,
+    "target_gene_indices": null,
+    "target_panel": null,
+    "target_set_name": null
+}

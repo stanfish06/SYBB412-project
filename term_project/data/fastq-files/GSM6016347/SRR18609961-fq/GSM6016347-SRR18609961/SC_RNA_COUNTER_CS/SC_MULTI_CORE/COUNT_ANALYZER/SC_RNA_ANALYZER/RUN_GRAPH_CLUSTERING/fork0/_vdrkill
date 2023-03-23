@@ -1,0 +1,38 @@
+{
+    "count": 10,
+    "size": 28778967,
+    "timestamp": "2023-03-20 03:49:54",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/chnk0-u07f6181009/files/chunked_neighbors.h5",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/join-u07f6181008/files/clusters_csv",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/join-u07f6181008/files/louvain.out",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/join-u07f6181008/files/matrix.bin",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u07f6181008/files/0_submatrix.h5",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u07f6181008/files/neighbor_index.pickle",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u07f6181008/files/use_bcs.h5",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/join-u07f6181008/files/clusters_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T03:49:28-04:00",
+            "DeltaBytes": 823168
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:29-04:00",
+            "DeltaBytes": 22678616
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:33-04:00",
+            "DeltaBytes": 5305144
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:39.931302147-04:00",
+            "DeltaBytes": -28765862
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:54.528731146-04:00",
+            "DeltaBytes": -13105
+        }
+    ]
+}

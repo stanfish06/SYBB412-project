@@ -1,0 +1,11 @@
+{
+    "annotations_bed": null,
+    "cell_barcodes": null,
+    "contig_fasta": null,
+    "contig_fasta_fai": null,
+    "contig_fastq": null,
+    "filtered_contig_fasta": null,
+    "filtered_contig_fastq": null,
+    "paired_cell_barcodes": null,
+    "summary": null
+}

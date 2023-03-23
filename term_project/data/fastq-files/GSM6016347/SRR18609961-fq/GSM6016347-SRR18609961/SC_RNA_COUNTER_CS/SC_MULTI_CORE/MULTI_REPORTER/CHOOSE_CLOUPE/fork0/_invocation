@@ -1,0 +1,6 @@
+@include "rna/_sc_multi_defs.mro"
+
+call CHOOSE_CLOUPE(
+    library_cloupe = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/join-u07f61810a6/files/output_for_cloupe.cloupe",
+    sample_cloupe  = null,
+)

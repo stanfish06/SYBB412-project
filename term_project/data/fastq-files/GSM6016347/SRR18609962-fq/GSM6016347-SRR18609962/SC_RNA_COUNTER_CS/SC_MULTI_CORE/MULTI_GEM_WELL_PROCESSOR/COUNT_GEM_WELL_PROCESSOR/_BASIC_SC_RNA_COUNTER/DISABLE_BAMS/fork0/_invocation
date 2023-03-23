@@ -1,0 +1,7 @@
+@include "rna/_basic_sc_rna_counter_stages.mro"
+
+call DISABLE_BAMS(
+    no_bam        = true,
+    disable_multi = true,
+    is_pd         = false,
+)

@@ -1,0 +1,11 @@
+{
+    "pca_csv_list": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_PCA/fork0/join-u2b3c1828aa/files/pca_csv",
+        null
+    ],
+    "pca_h5_list": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_PCA/fork0/join-u2b3c1828aa/files/pca_h5.h5",
+        null
+    ],
+    "skip": false
+}

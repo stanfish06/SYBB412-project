@@ -1,0 +1,10 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "cells_per_tag": null,
+    "filtered_barcodes": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u07f6180f60/files/filtered_barcodes.csv",
+    "force_sample_barcodes": null,
+    "gem_well": 1,
+    "multi_graph": null
+}

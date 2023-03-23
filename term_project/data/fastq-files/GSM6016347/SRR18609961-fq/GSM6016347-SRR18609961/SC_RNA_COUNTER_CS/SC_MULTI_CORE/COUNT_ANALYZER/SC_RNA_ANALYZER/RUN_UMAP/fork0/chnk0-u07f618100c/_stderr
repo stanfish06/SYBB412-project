@@ -1,0 +1,94 @@
+[stderr]
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py:469: NumbaWarning: 
+Compilation is falling back to object mode WITH looplifting enabled because Function "make_angular_tree" failed type inference due to: Cannot unify RandomProjectionTreeNode(array(int64, 1d, C), bool, none, none, none, none) and RandomProjectionTreeNode(none, bool, array(float32, 1d, C), none, RandomProjectionTreeNode(array(int64, 1d, C), bool, none, none, none, none), RandomProjectionTreeNode(array(int64, 1d, C), bool, none, none, none, none)) for '$46call_function.15', defined at /usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py (476)
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py", line 476:
+def make_angular_tree(data, indices, rng_state, leaf_size=30):
+    <source elided>
+
+        left_node = make_angular_tree(data, left_indices, rng_state, leaf_size)
+        ^
+
+During: resolving callee type: recursive(type(CPUDispatcher(<function make_angular_tree at 0x7f45cd563b90>)))
+During: typing of call at /usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py (476)
+
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py", line 476:
+def make_angular_tree(data, indices, rng_state, leaf_size=30):
+    <source elided>
+
+        left_node = make_angular_tree(data, left_indices, rng_state, leaf_size)
+        ^
+
+  @numba.jit()
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/object_mode_passes.py:178: NumbaWarning: Function "make_angular_tree" was compiled in object mode without forceobj=True.
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py", line 470:
+@numba.jit()
+def make_angular_tree(data, indices, rng_state, leaf_size=30):
+^
+
+  state.func_ir.loc))
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/object_mode_passes.py:188: NumbaDeprecationWarning: 
+Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.
+
+For more information visit https://numba.pydata.org/numba-doc/latest/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/rp_tree.py", line 470:
+@numba.jit()
+def make_angular_tree(data, indices, rng_state, leaf_size=30):
+^
+
+  state.func_ir.loc))
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/nndescent.py:92: NumbaPerformanceWarning: 
+The keyword argument 'parallel=True' was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see https://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/utils.py", line 409:
+@numba.njit(parallel=True)
+def build_candidates(current_graph, n_vertices, n_neighbors, max_candidates, rng_state):
+^
+
+  current_graph, n_vertices, n_neighbors, max_candidates, rng_state
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/typed_passes.py:314: NumbaPerformanceWarning: 
+The keyword argument 'parallel=True' was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see https://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/nndescent.py", line 47:
+    @numba.njit(parallel=True)
+    def nn_descent(
+    ^
+
+  state.func_ir.loc))
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py:349: NumbaWarning: 
+Compilation is falling back to object mode WITH looplifting enabled because Function "fuzzy_simplicial_set" failed type inference due to: Untyped global name 'nearest_neighbors': cannot determine Numba type of <class 'function'>
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py", line 467:
+def fuzzy_simplicial_set(
+    <source elided>
+    if knn_indices is None or knn_dists is None:
+        knn_indices, knn_dists, _ = nearest_neighbors(
+        ^
+
+  @numba.jit()
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/object_mode_passes.py:178: NumbaWarning: Function "fuzzy_simplicial_set" was compiled in object mode without forceobj=True.
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py", line 350:
+@numba.jit()
+def fuzzy_simplicial_set(
+^
+
+  state.func_ir.loc))
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/object_mode_passes.py:188: NumbaDeprecationWarning: 
+Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.
+
+For more information visit https://numba.pydata.org/numba-doc/latest/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py", line 350:
+@numba.jit()
+def fuzzy_simplicial_set(
+^
+
+  state.func_ir.loc))

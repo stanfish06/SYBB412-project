@@ -1,0 +1,31 @@
+[
+    {
+        "check_barcodes_compatibility": {
+            "libraries_to_translate": []
+        },
+        "detect_count_chem": {
+            "chemistry_type": "SC5P-PE",
+            "is_antibody_only": false
+        },
+        "detect_vdj_chem": null,
+        "sample_defs_count": [
+            {
+                "fastq_id": null,
+                "fastq_mode": "ILMN_BCL2FASTQ",
+                "gem_group": null,
+                "lanes": null,
+                "library_type": "Gene Expression",
+                "read_path": "/scratch/pbsjobs/job.18703647.hpc/SRR18609959_fastqs-folder",
+                "sample_indices": [
+                    "any"
+                ],
+                "sample_names": [
+                    "SRR18609959"
+                ],
+                "subsample_rate": null,
+                "target_set": null,
+                "target_set_name": null
+            }
+        ]
+    }
+]

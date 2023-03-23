@@ -1,0 +1,9 @@
+@include "rna/_sc_rna_analyzer_stages.mro"
+
+call COMBINE_CLUSTERING(
+    skip           = false,
+    kmeans_h5      = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_KMEANS/fork0/join-u5643181832/files/kmeans_h5.h5",
+    kmeans_csv     = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_KMEANS/fork0/join-u5643181832/files/kmeans_csv",
+    graphclust_h5  = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/MERGE_CLUSTERS/fork0/join-u564318183a/files/clusters_h5.h5",
+    graphclust_csv = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/MERGE_CLUSTERS/fork0/join-u564318183a/files/clusters_csv",
+)

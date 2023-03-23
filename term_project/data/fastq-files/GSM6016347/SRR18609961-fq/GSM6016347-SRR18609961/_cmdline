@@ -1,0 +1,1 @@
+cellranger count --no-bam --id=GSM6016347-SRR18609961 --fastqs=./SRR18609961_fastqs-folder --transcriptome=/scratch/users/zxy441/term_project/data/human-reference/hg38-genome

@@ -1,0 +1,11 @@
+@include "rna/_assign_tags_stages.mro"
+
+call SUMMARIZE_MULTIPLEXING_ANALYSIS(
+    tag_calls_summary           = null,
+    tag_calls_per_cell          = null,
+    cells_per_tag               = null,
+    tag_umi_thresholds_json     = null,
+    tag_umi_thresholds_csv      = null,
+    marginal_tag_frequencies    = null,
+    assignment_confidence_table = null,
+)

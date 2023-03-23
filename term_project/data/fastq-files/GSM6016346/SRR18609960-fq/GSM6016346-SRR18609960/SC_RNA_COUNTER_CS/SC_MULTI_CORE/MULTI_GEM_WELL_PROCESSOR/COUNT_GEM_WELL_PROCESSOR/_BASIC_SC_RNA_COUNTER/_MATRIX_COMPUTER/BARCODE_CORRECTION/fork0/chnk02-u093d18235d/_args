@@ -1,0 +1,58 @@
+{
+    "__mem_gb": 4,
+    "__threads": 4,
+    "__vmem_gb": 7,
+    "barcode_counts": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u093d1821b4/files/barcode_counts.bcc.bincode",
+    "barcode_segment_counts": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u093d1821b4/files/barcode_segment_counts.bsc.bincode",
+    "chemistry_def": {
+        "barcode": [
+            {
+                "kind": "gel_bead",
+                "length": 16,
+                "offset": 0,
+                "read_type": "R1",
+                "whitelist": "737K-august-2016"
+            }
+        ],
+        "description": "Single Cell 5' PE",
+        "endedness": "five_prime",
+        "name": "SC5P-PE",
+        "rna": {
+            "length": null,
+            "min_length": null,
+            "offset": 26,
+            "read_type": "R1"
+        },
+        "rna2": {
+            "length": null,
+            "min_length": null,
+            "offset": 0,
+            "read_type": "R2"
+        },
+        "strandedness": "+",
+        "umi": {
+            "length": 10,
+            "min_length": null,
+            "offset": 16,
+            "read_type": "R1"
+        }
+    },
+    "gem_well": 1,
+    "invalid_uncorrected": [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u093d1821be/files/invalid.shard"
+    ],
+    "libraries_to_translate": [],
+    "range": {
+        "end": {
+            "gem_group": 1,
+            "sequence": "CACACCAACGCCTCGA",
+            "valid": false
+        },
+        "start": {
+            "gem_group": 1,
+            "sequence": "ATACCGCTCCGCGTGC",
+            "valid": false
+        }
+    },
+    "valid_read_metrics": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u093d1821b4/files/bc_correct_summary.bcm.bincode"
+}

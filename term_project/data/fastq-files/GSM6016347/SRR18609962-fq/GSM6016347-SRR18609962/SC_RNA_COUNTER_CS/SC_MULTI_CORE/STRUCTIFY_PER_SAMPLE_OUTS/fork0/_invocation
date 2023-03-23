@@ -1,0 +1,11 @@
+@include "rna/_sc_multi_defs.mro"
+
+call STRUCTIFY_PER_SAMPLE_OUTS(
+    sample_bams           = null,
+    sample_metrics        = null,
+    sample_molecule_infos = null,
+    sample_matrices       = null,
+    multi_graph           = null,
+    feature_reference     = null,
+    target_panel          = null,
+)

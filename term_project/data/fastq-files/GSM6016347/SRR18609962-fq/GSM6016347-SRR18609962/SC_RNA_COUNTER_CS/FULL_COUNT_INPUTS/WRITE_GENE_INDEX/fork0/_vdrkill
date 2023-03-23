@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 184366524,
+    "timestamp": "2023-03-20 04:50:36",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/FULL_COUNT_INPUTS/WRITE_GENE_INDEX/fork0/chnk0-u2b3c181e06/files/gene_index.json"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T04:49:10-04:00",
+            "DeltaBytes": 184373438
+        },
+        {
+            "Timestamp": "2023-03-20T04:50:36.651095045-04:00",
+            "DeltaBytes": -184366524
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "allowed_chems": [
+        "auto",
+        "custom",
+        "threeprime",
+        "fiveprime",
+        "SC3P_auto",
+        "SC5P_auto",
+        "SC3Pv1",
+        "SC3Pv2",
+        "SC3Pv3",
+        "SC3Pv3LT",
+        "SC5P-PE",
+        "SC5P-R1",
+        "SC5P-R2",
+        "SC-FB",
+        "ARC-v1"
+    ],
+    "chemistry_name_spec": "auto",
+    "r1_length": null,
+    "r2_length": null,
+    "reference_path": "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+    "sample_def": [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/scratch/pbsjobs/job.18703648.hpc/SRR18609961_fastqs-folder",
+            "sample_indices": [
+                "any"
+            ],
+            "sample_names": [
+                "SRR18609961"
+            ],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null
+        }
+    ]
+}

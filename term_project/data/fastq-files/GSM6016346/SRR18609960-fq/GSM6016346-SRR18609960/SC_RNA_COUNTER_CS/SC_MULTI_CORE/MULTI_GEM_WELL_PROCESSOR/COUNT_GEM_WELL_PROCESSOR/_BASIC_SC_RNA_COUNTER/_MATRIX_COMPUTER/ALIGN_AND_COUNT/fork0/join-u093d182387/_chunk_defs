@@ -1,0 +1,24 @@
+[
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "TGTTGGTTGATTGTAG",
+                "valid": false
+            },
+            "start": null
+        },
+        "read_ann_subsample_rate": 1.0
+    },
+    {
+        "range": {
+            "end": null,
+            "start": {
+                "gem_group": 1,
+                "sequence": "TGTTGGTTGATTGTAG",
+                "valid": false
+            }
+        },
+        "read_ann_subsample_rate": 1.0
+    }
+]

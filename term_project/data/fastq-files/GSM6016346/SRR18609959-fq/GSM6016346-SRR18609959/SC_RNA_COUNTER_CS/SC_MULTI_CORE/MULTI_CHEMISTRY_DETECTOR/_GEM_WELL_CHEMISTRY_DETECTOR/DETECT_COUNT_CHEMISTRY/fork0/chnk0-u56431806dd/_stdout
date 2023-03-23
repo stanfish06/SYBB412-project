@@ -1,0 +1,42 @@
+[stdout]
+Number of fastq units = 1
+Sampling reads from: Sample SRR18609959 in "/scratch/pbsjobs/job.18703647.hpc/SRR18609959_fastqs-folder"
+Potential chemistries: {ThreePrimeV2, ThreePrimeV3LT, FivePrimeR2, FivePrimePE, ThreePrimeV3, ThreePrimeV1}
+
+
+Length based filtering for Sample SRR18609959 in "/scratch/pbsjobs/job.18703647.hpc/SRR18609959_fastqs-folder"
+LengthStats {
+    median: {
+        R2: 150,
+        I1: 0,
+        R1: 150,
+    },
+}
+Compatible chemistries: {ThreePrimeV3LT, FivePrimePE, ThreePrimeV3, FivePrimeR2, ThreePrimeV2}
+Result: {FivePrimeR2, FivePrimePE, ThreePrimeV3, ThreePrimeV1, ThreePrimeV2, ThreePrimeV3LT}
+After length filter: {ThreePrimeV2, ThreePrimeV3LT, ThreePrimeV3, FivePrimePE}
+
+
+Whitelist based filtering for Sample SRR18609959 in "/scratch/pbsjobs/job.18703647.hpc/SRR18609959_fastqs-folder"
+{
+    ThreePrimeV3LT: 0.00002,
+    FivePrimePE: 0.88403,
+    ThreePrimeV3: 0.07532,
+    ThreePrimeV2: 0.88403,
+}
+Compatible chemistries: {FivePrimePE, ThreePrimeV2}
+Result: {ThreePrimeV3, FivePrimePE, ThreePrimeV2, ThreePrimeV3LT}
+After whitelist filter: {FivePrimePE, ThreePrimeV2}
+opening: "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome/genes/genes.gtf.gz"
+
+
+Mapping based filtering for Sample SRR18609959 in "/scratch/pbsjobs/job.18703647.hpc/SRR18609959_fastqs-folder"
+MappingStats {
+    total_reads: 100000,
+    sense_reads: 3650,
+    antisense_reads: 65728,
+    conf_mapped_reads: 82702,
+}
+Compatible chemistries: {FivePrimePE}
+Result: {FivePrimePE, ThreePrimeV2}
+After mapping filter: {FivePrimePE}

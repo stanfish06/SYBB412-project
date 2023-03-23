@@ -1,0 +1,8 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "disable_multi": true,
+    "is_pd": false,
+    "no_bam": true
+}

@@ -1,0 +1,28 @@
+{
+    "count": 4,
+    "size": 116083,
+    "timestamp": "2023-03-20 03:49:55",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/MERGE_CLUSTERS/fork0/join-u07f6181013/files/clusters_csv",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/MERGE_CLUSTERS/fork0/join-u07f6181013/files/clusters_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T03:49:40-04:00",
+            "DeltaBytes": 7367
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:41-04:00",
+            "DeltaBytes": 7722
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:43-04:00",
+            "DeltaBytes": 125188
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:55.427722797-04:00",
+            "DeltaBytes": -116083
+        }
+    ]
+}

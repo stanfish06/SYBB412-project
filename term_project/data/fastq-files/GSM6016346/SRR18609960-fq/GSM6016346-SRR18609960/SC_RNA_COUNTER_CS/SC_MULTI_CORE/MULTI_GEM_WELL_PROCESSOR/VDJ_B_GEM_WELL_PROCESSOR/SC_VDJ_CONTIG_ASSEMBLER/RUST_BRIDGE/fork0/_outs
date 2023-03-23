@@ -1,0 +1,9 @@
+{
+    "barcodes": null,
+    "bc_sorted_rna_reads": null,
+    "corrected_barcode_counts_json": null,
+    "gem_groups": null,
+    "n50_n50_rpu": null,
+    "processed_read_pairs": null,
+    "raw_barcode_counts_json": null
+}

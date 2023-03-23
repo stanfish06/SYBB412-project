@@ -1,0 +1,11 @@
+@include "rna/_sc_rna_analyzer_stages.mro"
+
+call RUN_KMEANS(
+    matrix_h5    = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u07f6180ff6/files/preprocessed_matrix_h5.h5",
+    pca_h5       = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u07f6181007/files/pca_h5.h5",
+    skip         = false,
+    random_seed  = null,
+    max_clusters = null,
+    num_bcs      = null,
+    num_pcs      = null,
+)

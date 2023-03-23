@@ -1,0 +1,14 @@
+{
+    "align_info": null,
+    "assemblable_reads_per_bc": null,
+    "barcode_support": null,
+    "barcodes_in_chunks": null,
+    "contig_annotations": null,
+    "contig_bam": null,
+    "contig_bam_bai": null,
+    "metrics_summary_json": null,
+    "report": null,
+    "summary_tsv": null,
+    "umi_summary_tsv": null,
+    "unmapped_sample_fastq": null
+}

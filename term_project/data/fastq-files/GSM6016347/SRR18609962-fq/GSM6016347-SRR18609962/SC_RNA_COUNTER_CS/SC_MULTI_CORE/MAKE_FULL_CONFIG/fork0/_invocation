@@ -1,0 +1,13 @@
+@include "rna/_sc_multi_defs.mro"
+
+call MAKE_FULL_CONFIG(
+    vdj_t_input        = null,
+    vdj_b_input        = null,
+    basic_config       = {
+        disable_count:       false,
+        disable_multi:       true,
+        disable_multi_count: true,
+        disable_vdj:         true,
+    },
+    vdj_reference_path = null,
+)

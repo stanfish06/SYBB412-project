@@ -1,0 +1,97 @@
+{
+    "chemistry_def": {
+        "barcode": [
+            {
+                "kind": "gel_bead",
+                "length": 16,
+                "offset": 0,
+                "read_type": "R1",
+                "whitelist": "737K-august-2016"
+            }
+        ],
+        "description": "Single Cell 5' PE",
+        "endedness": "five_prime",
+        "name": "SC5P-PE",
+        "rna": {
+            "length": null,
+            "min_length": null,
+            "offset": 26,
+            "read_type": "R1"
+        },
+        "rna2": {
+            "length": null,
+            "min_length": null,
+            "offset": 0,
+            "read_type": "R2"
+        },
+        "strandedness": "+",
+        "umi": {
+            "length": 10,
+            "min_length": null,
+            "offset": 16,
+            "read_type": "R1"
+        }
+    },
+    "feature_reference_path": null,
+    "gem_well": 1,
+    "initial_read_pairs": null,
+    "libraries_to_translate": [],
+    "r1_length": null,
+    "r2_length": null,
+    "read_chunks": [
+        {
+            "chemistry": {
+                "barcode": [
+                    {
+                        "kind": "gel_bead",
+                        "length": 16,
+                        "offset": 0,
+                        "read_type": "R1",
+                        "whitelist": "737K-august-2016"
+                    }
+                ],
+                "description": "Single Cell 5' PE",
+                "endedness": "five_prime",
+                "name": "SC5P-PE",
+                "rna": {
+                    "length": null,
+                    "min_length": null,
+                    "offset": 26,
+                    "read_type": "R1"
+                },
+                "rna2": {
+                    "length": null,
+                    "min_length": null,
+                    "offset": 0,
+                    "read_type": "R2"
+                },
+                "strandedness": "+",
+                "umi": {
+                    "length": 10,
+                    "min_length": null,
+                    "offset": 16,
+                    "read_type": "R1"
+                }
+            },
+            "chunk_id": 0,
+            "fastq_id": null,
+            "fastqs": {
+                "i1": null,
+                "i2": null,
+                "r1": "/scratch/pbsjobs/job.18703647.hpc/SRR18609960_fastqs-folder/SRR18609960_S1_L001_R1_001.fastq",
+                "r1_interleaved": false,
+                "r2": "/scratch/pbsjobs/job.18703647.hpc/SRR18609960_fastqs-folder/SRR18609960_S1_L001_R2_001.fastq"
+            },
+            "gem_group": 1,
+            "library_id": 0,
+            "library_type": "Gene Expression",
+            "read_group": "GSM6016346-SRR18609960:0:1:unknow_flowcell:0",
+            "read_lengths": {},
+            "subsample_rate": null
+        }
+    ],
+    "reference_path": "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+    "subsample_rate": null,
+    "target_features": null,
+    "target_set_name": null
+}

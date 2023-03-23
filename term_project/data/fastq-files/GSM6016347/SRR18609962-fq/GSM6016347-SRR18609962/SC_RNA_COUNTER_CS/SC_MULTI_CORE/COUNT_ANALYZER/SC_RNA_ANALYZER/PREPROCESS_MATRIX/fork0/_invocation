@@ -1,0 +1,13 @@
+@include "rna/_sc_rna_analyzer_stages.mro"
+
+call PREPROCESS_MATRIX(
+    matrix_h5        = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u2b3c182873/files/filtered_matrices_h5.h5",
+    skip             = false,
+    random_seed      = null,
+    use_genes        = null,
+    exclude_genes    = null,
+    use_bcs          = null,
+    num_bcs          = null,
+    force_cells      = null,
+    is_antibody_only = false,
+)

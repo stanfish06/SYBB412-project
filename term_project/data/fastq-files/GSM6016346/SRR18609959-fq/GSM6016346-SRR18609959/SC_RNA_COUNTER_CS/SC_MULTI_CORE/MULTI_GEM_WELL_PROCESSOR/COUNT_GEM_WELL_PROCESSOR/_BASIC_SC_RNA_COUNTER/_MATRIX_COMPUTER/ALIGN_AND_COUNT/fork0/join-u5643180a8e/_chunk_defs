@@ -1,0 +1,54 @@
+[
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "CTGGTCTGTCTTGCGC",
+                "valid": false
+            },
+            "start": null
+        },
+        "read_ann_subsample_rate": 0.8173733949661255
+    },
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "TTTCCTCTCAAGCACT",
+                "valid": false
+            },
+            "start": {
+                "gem_group": 1,
+                "sequence": "CTGGTCTGTCTTGCGC",
+                "valid": false
+            }
+        },
+        "read_ann_subsample_rate": 0.8173733949661255
+    },
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "CTGCCTAGTATAGGGC",
+                "valid": true
+            },
+            "start": {
+                "gem_group": 1,
+                "sequence": "TTTCCTCTCAAGCACT",
+                "valid": false
+            }
+        },
+        "read_ann_subsample_rate": 0.8173733949661255
+    },
+    {
+        "range": {
+            "end": null,
+            "start": {
+                "gem_group": 1,
+                "sequence": "CTGCCTAGTATAGGGC",
+                "valid": true
+            }
+        },
+        "read_ann_subsample_rate": 0.8173733949661255
+    }
+]

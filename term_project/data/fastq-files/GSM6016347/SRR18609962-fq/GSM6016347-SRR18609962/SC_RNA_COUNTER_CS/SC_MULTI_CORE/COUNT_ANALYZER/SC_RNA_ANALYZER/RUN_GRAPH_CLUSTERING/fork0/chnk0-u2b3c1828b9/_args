@@ -1,0 +1,21 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "balltree_leaf_size": null,
+    "input_pcs": null,
+    "k_nearest": 200,
+    "matrix_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u2b3c1828a4/files/preprocessed_matrix_h5.h5",
+    "neighbor_a": null,
+    "neighbor_b": null,
+    "neighbor_index": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u2b3c1828b7/files/neighbor_index.pickle",
+    "num_bcs": null,
+    "num_neighbors": null,
+    "pca_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u2b3c1828b4/files/pca_h5.h5",
+    "row_start": 0,
+    "similarity_type": "nn",
+    "skip": false,
+    "submatrix": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u2b3c1828b7/files/0_submatrix.h5",
+    "total_rows": 3852,
+    "use_bcs": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/split-u2b3c1828b7/files/use_bcs.h5"
+}

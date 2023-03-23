@@ -1,0 +1,34 @@
+{
+    "count": 8,
+    "size": 682632,
+    "timestamp": "2023-03-20 03:51:58",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/chnk0-u07f618100a/files/tsne_csv",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/chnk0-u07f618100a/files/tsne_h5.h5",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/join-u07f6181008/files/tsne_csv",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/join-u07f6181008/files/tsne_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T03:49:28-04:00",
+            "DeltaBytes": 7447
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:30-04:00",
+            "DeltaBytes": 351099
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:46-04:00",
+            "DeltaBytes": 349291
+        },
+        {
+            "Timestamp": "2023-03-20T03:49:47.980007461-04:00",
+            "DeltaBytes": -341548
+        },
+        {
+            "Timestamp": "2023-03-20T03:51:58.140261194-04:00",
+            "DeltaBytes": -341084
+        }
+    ]
+}

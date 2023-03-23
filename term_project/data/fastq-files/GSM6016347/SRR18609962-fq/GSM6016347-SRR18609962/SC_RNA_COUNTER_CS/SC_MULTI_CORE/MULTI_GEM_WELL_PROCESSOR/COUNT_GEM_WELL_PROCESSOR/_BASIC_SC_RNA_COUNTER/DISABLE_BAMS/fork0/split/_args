@@ -1,0 +1,5 @@
+{
+    "disable_multi": true,
+    "is_pd": false,
+    "no_bam": true
+}

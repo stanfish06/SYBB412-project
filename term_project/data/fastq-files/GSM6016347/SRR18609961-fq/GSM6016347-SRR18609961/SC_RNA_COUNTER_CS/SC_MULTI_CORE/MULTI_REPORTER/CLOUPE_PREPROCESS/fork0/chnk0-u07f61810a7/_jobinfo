@@ -1,0 +1,198 @@
+{
+    "name": "ID.GSM6016347-SRR18609961.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS.fork0.chnk0",
+    "pid": 7585,
+    "host": "classt03",
+    "type": "local",
+    "cwd": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/chnk0-u07f61810a7/files",
+    "python": {
+        "binpath": "/usr/local/cellranger/6.0.1/external/anaconda/bin/python",
+        "version": "3.7.6 (default, Jan  8 2020, 19:59:22) \n[GCC 7.3.0]"
+    },
+    "rusage": {
+        "self": {
+            "ru_maxrss": 37452,
+            "ru_ixrss": 0,
+            "ru_idrss": 0,
+            "ru_minflt": 683,
+            "ru_majflt": 0,
+            "ru_nswap": 0,
+            "ru_utime": 0.001232,
+            "ru_stime": 0.009586,
+            "ru_inblock": 0,
+            "ru_oublock": 56,
+            "ru_msgsnd": 0,
+            "ru_msgrcv": 0,
+            "ru_nsignals": 0,
+            "ru_nivcsw": 1
+        },
+        "children": {
+            "ru_maxrss": 852752,
+            "ru_ixrss": 0,
+            "ru_idrss": 0,
+            "ru_minflt": 87309,
+            "ru_majflt": 15,
+            "ru_nswap": 0,
+            "ru_utime": 16.572082,
+            "ru_stime": 0.756976,
+            "ru_inblock": 202240,
+            "ru_oublock": 65592,
+            "ru_msgsnd": 0,
+            "ru_msgrcv": 0,
+            "ru_nsignals": 0,
+            "ru_nivcsw": 55
+        }
+    },
+    "used_bytes": {
+        "rss": 969515008,
+        "shared": 128966656,
+        "vmem": 3320389632,
+        "text": 14069760,
+        "stack": 2731966464,
+        "proc_count": 20
+    },
+    "io": {
+        "total": {
+            "read": {
+                "sysc": 7088,
+                "bytes": 23961600
+            },
+            "write": {
+                "sysc": 218,
+                "bytes": 0
+            }
+        },
+        "max": {
+            "read": {
+                "sysc": 945.9151275759953,
+                "bytes": 4780422.275655232
+            },
+            "write": {
+                "sysc": 25.1976647711406,
+                "bytes": 0
+            }
+        },
+        "dev": {
+            "read": {
+                "sysc": 239.52267826309452,
+                "bytes": 2384502.911213133
+            },
+            "write": {
+                "sysc": 3.6331814220992373,
+                "bytes": 0
+            }
+        }
+    },
+    "wallclock": {
+        "start": "2023-03-20 03:52:07",
+        "end": "2023-03-20 03:52:20",
+        "duration_seconds": 13.344880002
+    },
+    "threads": 1,
+    "memGB": 6,
+    "vmemGB": 9,
+    "profile_mode": "disable",
+    "stackvars_flag": "disable",
+    "monitor_flag": "disable",
+    "invocation": {
+        "call": "SC_RNA_COUNTER_CS",
+        "args": {
+            "chemistry": "auto",
+            "feature_reference": null,
+            "force_cells": null,
+            "include_introns": false,
+            "no_bam": true,
+            "no_secondary_analysis": false,
+            "no_target_umi_filter": false,
+            "r1_length": null,
+            "r2_length": null,
+            "recovered_cells": null,
+            "reference_path": "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+            "sample_def": [
+                {
+                    "fastq_id": null,
+                    "fastq_mode": "ILMN_BCL2FASTQ",
+                    "gem_group": null,
+                    "lanes": null,
+                    "library_type": "Gene Expression",
+                    "read_path": "/scratch/pbsjobs/job.18703648.hpc/SRR18609961_fastqs-folder",
+                    "sample_indices": [
+                        "any"
+                    ],
+                    "sample_names": [
+                        "SRR18609961"
+                    ],
+                    "subsample_rate": null,
+                    "target_set": null,
+                    "target_set_name": null
+                }
+            ],
+            "sample_desc": "",
+            "sample_id": "GSM6016347-SRR18609961",
+            "trim_polya_min_score": 20,
+            "trim_tso_min_score": 20
+        },
+        "mro_file": "rna/sc_rna_counter_cs.mro"
+    },
+    "version": {
+        "martian": "v4.0.4",
+        "pipelines": "cellranger-6.0.1"
+    },
+    "sge": {
+        "SLURM_ARRAY_JOB_ID": "18703646",
+        "SLURM_ARRAY_TASK_COUNT": "10",
+        "SLURM_ARRAY_TASK_ID": "2",
+        "SLURM_ARRAY_TASK_MAX": "10",
+        "SLURM_ARRAY_TASK_MIN": "1",
+        "SLURM_ARRAY_TASK_STEP": "1",
+        "SLURM_CLUSTER_NAME": "smaster",
+        "SLURM_CONF": "/var/spool/slurm/conf-cache/slurm.conf",
+        "SLURM_CPUS_ON_NODE": "15",
+        "SLURM_CPUS_PER_TASK": "15",
+        "SLURM_DISTRIBUTION": "cyclic",
+        "SLURM_GTIDS": "0",
+        "SLURM_JOBID": "18703648",
+        "SLURM_JOB_ACCOUNT": "gxb43_sybb412",
+        "SLURM_JOB_CPUS_PER_NODE": "15",
+        "SLURM_JOB_CPUS_PER_NODE_PACK_GROUP_0": "15",
+        "SLURM_JOB_GID": "10396",
+        "SLURM_JOB_ID": "18703648",
+        "SLURM_JOB_NAME": "term_project_sra_zxy441",
+        "SLURM_JOB_NODELIST": "classt03",
+        "SLURM_JOB_NUM_NODES": "1",
+        "SLURM_JOB_PARTITION": "class",
+        "SLURM_JOB_QOS": "gpuext2",
+        "SLURM_JOB_UID": "1037336",
+        "SLURM_JOB_USER": "zxy441",
+        "SLURM_LAUNCH_NODE_IPADDR": "192.168.212.203",
+        "SLURM_LOCALID": "0",
+        "SLURM_MEM_PER_NODE": "102400",
+        "SLURM_MPI_TYPE": "pmi2",
+        "SLURM_NNODES": "1",
+        "SLURM_NODEID": "0",
+        "SLURM_NODELIST": "classt03",
+        "SLURM_NODE_ALIASES": "(null)",
+        "SLURM_NPROCS": "1",
+        "SLURM_NTASKS": "1",
+        "SLURM_PARTITION": "class",
+        "SLURM_PRIO_PROCESS": "0",
+        "SLURM_PROCID": "0",
+        "SLURM_SCRIPT_CONTEXT": "prolog_task",
+        "SLURM_SRUN_COMM_HOST": "192.168.212.203",
+        "SLURM_SRUN_COMM_PORT": "34683",
+        "SLURM_STEPID": "0",
+        "SLURM_STEP_ID": "0",
+        "SLURM_STEP_LAUNCHER_PORT": "34683",
+        "SLURM_STEP_NODELIST": "classt03",
+        "SLURM_STEP_NUM_NODES": "1",
+        "SLURM_STEP_NUM_TASKS": "1",
+        "SLURM_STEP_TASKS_PER_NODE": "1",
+        "SLURM_SUBMIT_DIR": "/scratch/users/zxy441/term_project/data",
+        "SLURM_SUBMIT_HOST": "hpc6",
+        "SLURM_TASKS_PER_NODE": "1",
+        "SLURM_TASK_PID": "30218",
+        "SLURM_TOPOLOGY_ADDR": "classt03",
+        "SLURM_TOPOLOGY_ADDR_PATTERN": "node",
+        "SLURM_UMASK": "0022",
+        "SLURM_WORKING_CLUSTER": "smaster:192.168.223.228:6817:9728:109"
+    }
+}

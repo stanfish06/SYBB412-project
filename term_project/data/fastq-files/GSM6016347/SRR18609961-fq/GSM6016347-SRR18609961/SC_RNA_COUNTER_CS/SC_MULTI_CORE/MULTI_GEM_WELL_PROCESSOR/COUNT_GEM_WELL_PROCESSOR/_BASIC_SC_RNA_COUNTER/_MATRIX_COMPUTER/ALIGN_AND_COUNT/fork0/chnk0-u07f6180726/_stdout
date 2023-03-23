@@ -1,0 +1,3 @@
+[stdout]
+opening: "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome/genes/genes.gtf.gz"
+Error fetching io for 3330: permission denied

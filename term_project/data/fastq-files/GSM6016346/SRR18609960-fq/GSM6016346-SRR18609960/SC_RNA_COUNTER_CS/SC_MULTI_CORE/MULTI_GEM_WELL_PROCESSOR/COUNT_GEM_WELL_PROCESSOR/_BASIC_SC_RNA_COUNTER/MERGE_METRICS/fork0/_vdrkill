@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 38853,
+    "timestamp": "2023-03-20 05:53:36",
+    "paths": [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/MERGE_METRICS/fork0/chnk0-u093d182ccd/files/summary.json"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T05:52:13-04:00",
+            "DeltaBytes": 46178
+        },
+        {
+            "Timestamp": "2023-03-20T05:53:36.550184805-04:00",
+            "DeltaBytes": -38853
+        }
+    ]
+}

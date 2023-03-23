@@ -1,0 +1,16 @@
+[stdout]
+submatrix_load	self_premaxrss_mb	105.5
+submatrix_load	children_premaxrss_mb	105.5
+submatrix_load	self_postmaxrss_mb	107.0
+submatrix_load	children_postmaxrss_mb	31.5
+submatrix_load	elapsed_sec	0
+nn_idx_load	self_premaxrss_mb	107.0
+nn_idx_load	children_premaxrss_mb	107.0
+nn_idx_load	self_postmaxrss_mb	107.5
+nn_idx_load	children_postmaxrss_mb	31.5
+nn_idx_load	elapsed_sec	0
+nn_query	self_premaxrss_mb	107.5
+nn_query	children_premaxrss_mb	107.5
+nn_query	self_postmaxrss_mb	144.3
+nn_query	children_postmaxrss_mb	31.5
+nn_query	elapsed_sec	1

@@ -1,0 +1,20 @@
+{
+    "assign_tags_outs": {
+        "assignment_confidence_table": null,
+        "cells_per_tag": null,
+        "jibes_model_summary": null,
+        "jibes_parameters": null,
+        "jibes_summary_data": null,
+        "marginal_tag_frequencies": null,
+        "non_tag_assignments": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_ASSIGN_TAGS/CALL_TAGS_JIBES/fork0/join-u5643181816/files/non_tag_assignments.json",
+        "sample_assignment_metrics": null,
+        "sample_barcodes_json": null,
+        "tag_assigner_pickle": null,
+        "tag_call_metrics_json": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_ASSIGN_TAGS/MERGE_METRICS/fork0/chnk0-u5643181824/files/summary.json",
+        "tag_calls_per_cell": null,
+        "tag_calls_summary": null,
+        "tag_contaminant_info": null,
+        "tag_umi_thresholds_csv": null,
+        "tag_umi_thresholds_json": null
+    }
+}

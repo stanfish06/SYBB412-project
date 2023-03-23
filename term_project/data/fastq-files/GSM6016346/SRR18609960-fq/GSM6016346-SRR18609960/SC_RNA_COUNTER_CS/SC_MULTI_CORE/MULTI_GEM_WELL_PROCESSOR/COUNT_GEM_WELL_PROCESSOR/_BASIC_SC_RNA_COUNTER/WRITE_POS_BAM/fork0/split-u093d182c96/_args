@@ -1,0 +1,62 @@
+{
+    "alignments": [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/ALIGN_AND_COUNT/fork0/chnk0-u093d182388/files/pos_sorted.asf",
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/ALIGN_AND_COUNT/fork0/chnk1-u093d182388/files/pos_sorted.asf"
+    ],
+    "bam_header": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/ALIGN_AND_COUNT/fork0/join-u093d182387/files/bam_header",
+    "no_bam": true,
+    "read_chunks": [
+        {
+            "chemistry": {
+                "barcode": [
+                    {
+                        "kind": "gel_bead",
+                        "length": 16,
+                        "offset": 0,
+                        "read_type": "R1",
+                        "whitelist": "737K-august-2016"
+                    }
+                ],
+                "description": "Single Cell 5' PE",
+                "endedness": "five_prime",
+                "name": "SC5P-PE",
+                "rna": {
+                    "length": null,
+                    "min_length": null,
+                    "offset": 26,
+                    "read_type": "R1"
+                },
+                "rna2": {
+                    "length": null,
+                    "min_length": null,
+                    "offset": 0,
+                    "read_type": "R2"
+                },
+                "strandedness": "+",
+                "umi": {
+                    "length": 10,
+                    "min_length": null,
+                    "offset": 16,
+                    "read_type": "R1"
+                }
+            },
+            "chunk_id": 0,
+            "fastq_id": null,
+            "fastqs": {
+                "i1": null,
+                "i2": null,
+                "r1": "/scratch/pbsjobs/job.18703647.hpc/SRR18609960_fastqs-folder/SRR18609960_S1_L001_R1_001.fastq",
+                "r1_interleaved": false,
+                "r2": "/scratch/pbsjobs/job.18703647.hpc/SRR18609960_fastqs-folder/SRR18609960_S1_L001_R2_001.fastq"
+            },
+            "gem_group": 1,
+            "library_id": 0,
+            "library_type": "Gene Expression",
+            "read_group": "GSM6016346-SRR18609960:0:1:unknow_flowcell:0",
+            "read_lengths": {},
+            "subsample_rate": null
+        }
+    ],
+    "sample_barcodes_json": null,
+    "target_set_name": null
+}

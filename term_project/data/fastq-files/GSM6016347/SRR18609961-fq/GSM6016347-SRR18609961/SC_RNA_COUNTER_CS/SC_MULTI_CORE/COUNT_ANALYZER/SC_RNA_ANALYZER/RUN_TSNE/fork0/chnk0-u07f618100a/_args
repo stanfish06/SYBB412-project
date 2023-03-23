@@ -1,0 +1,19 @@
+{
+    "__mem_gb": 3,
+    "__threads": 1,
+    "__vmem_gb": 6,
+    "feature_type": "Gene Expression",
+    "input_pcs": null,
+    "is_antibody_only": false,
+    "matrix_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u07f6180ff6/files/preprocessed_matrix_h5.h5",
+    "max_dims": null,
+    "max_iter": null,
+    "mom_switch_iter": null,
+    "pca_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u07f6181007/files/pca_h5.h5",
+    "perplexity": null,
+    "random_seed": null,
+    "skip": false,
+    "stop_lying_iter": null,
+    "theta": null,
+    "tsne_dims": 2
+}

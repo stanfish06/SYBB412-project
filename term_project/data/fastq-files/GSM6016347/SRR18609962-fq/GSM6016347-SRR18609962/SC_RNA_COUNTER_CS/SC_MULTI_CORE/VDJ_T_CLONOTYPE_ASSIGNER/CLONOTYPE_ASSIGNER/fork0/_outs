@@ -1,0 +1,20 @@
+{
+    "airr_rearrangement": null,
+    "all_contig_annotations_csv": null,
+    "clonotypes_csv": null,
+    "concat_ref_bam": null,
+    "concat_ref_bam_bai": null,
+    "concat_ref_fasta": null,
+    "concat_ref_fasta_fai": null,
+    "consensus_annotations_csv": null,
+    "consensus_bam": null,
+    "consensus_bam_bai": null,
+    "consensus_fasta": null,
+    "consensus_fasta_fai": null,
+    "contig_annotations_json": null,
+    "disable_vloupe": null,
+    "donor_ref_fa": null,
+    "enclone_output": null,
+    "filtered_contig_annotations_csv": null,
+    "summary": null
+}

@@ -1,0 +1,28 @@
+{
+    "count": 2,
+    "size": 8813301,
+    "timestamp": "2023-03-20 05:37:26",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/chnk0-u2b3c18294a/files/gem_group_index_json.json",
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/chnk0-u2b3c18294a/files/output_for_cloupe.cloupe"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T05:37:13-04:00",
+            "DeltaBytes": 7918
+        },
+        {
+            "Timestamp": "2023-03-20T05:37:15-04:00",
+            "DeltaBytes": 8831647
+        },
+        {
+            "Timestamp": "2023-03-20T05:37:23-04:00",
+            "DeltaBytes": 8821968
+        },
+        {
+            "Timestamp": "2023-03-20T05:37:26-04:00",
+            "DeltaBytes": -8813301
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 6966871,
+    "timestamp": "2023-03-20 05:52:12",
+    "paths": [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/WRITE_BARCODE_INDEX/fork0/chnk0-u093d182386/files/barcode_index.bi.bincode"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T05:12:38-04:00",
+            "DeltaBytes": 6974106
+        },
+        {
+            "Timestamp": "2023-03-20T05:52:12.695019661-04:00",
+            "DeltaBytes": -6966871
+        }
+    ]
+}

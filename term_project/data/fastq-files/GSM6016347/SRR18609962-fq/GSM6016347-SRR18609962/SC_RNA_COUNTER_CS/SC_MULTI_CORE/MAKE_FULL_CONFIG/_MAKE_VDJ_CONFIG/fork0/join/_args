@@ -1,0 +1,9 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "disable_vdj": true,
+    "vdj_b_input": null,
+    "vdj_reference_path": null,
+    "vdj_t_input": null
+}

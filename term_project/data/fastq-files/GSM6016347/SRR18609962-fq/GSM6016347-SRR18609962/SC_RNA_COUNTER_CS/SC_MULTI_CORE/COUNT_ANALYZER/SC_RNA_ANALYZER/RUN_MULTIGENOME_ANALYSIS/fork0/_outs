@@ -1,0 +1,5 @@
+{
+    "multi_genome_csv": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_MULTIGENOME_ANALYSIS/fork0/join-u2b3c1828aa/files/multi_genome_csv",
+    "multi_genome_json": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_MULTIGENOME_ANALYSIS/fork0/join-u2b3c1828aa/files/multi_genome_json",
+    "multi_genome_summary": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_MULTIGENOME_ANALYSIS/fork0/join-u2b3c1828aa/files/multi_genome_summary.json"
+}

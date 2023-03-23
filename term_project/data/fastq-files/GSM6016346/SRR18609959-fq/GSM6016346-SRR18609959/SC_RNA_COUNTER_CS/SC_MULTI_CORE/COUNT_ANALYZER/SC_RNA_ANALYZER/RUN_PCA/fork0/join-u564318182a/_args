@@ -1,0 +1,12 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "is_antibody_only": false,
+    "matrix_h5": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u5643181826/files/preprocessed_matrix_h5.h5",
+    "num_bcs": null,
+    "num_genes": null,
+    "num_pcs": null,
+    "random_seed": null,
+    "skip": false
+}

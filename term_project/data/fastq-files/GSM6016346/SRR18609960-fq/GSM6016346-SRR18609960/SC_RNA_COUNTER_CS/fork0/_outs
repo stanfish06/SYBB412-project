@@ -1,0 +1,16 @@
+{
+    "analysis": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/analysis",
+    "cloupe": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/cloupe.cloupe",
+    "crispr_analysis": null,
+    "feature_reference": null,
+    "filtered_feature_bc_matrix": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/filtered_feature_bc_matrix",
+    "filtered_feature_bc_matrix_h5": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/filtered_feature_bc_matrix.h5",
+    "metrics_summary": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/metrics_summary.csv",
+    "molecule_info": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/molecule_info.h5",
+    "possorted_genome_bam": null,
+    "possorted_genome_bam_index": null,
+    "raw_feature_bc_matrix": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/raw_feature_bc_matrix",
+    "raw_feature_bc_matrix_h5": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/raw_feature_bc_matrix.h5",
+    "target_panel": null,
+    "web_summary": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/outs/web_summary.html"
+}

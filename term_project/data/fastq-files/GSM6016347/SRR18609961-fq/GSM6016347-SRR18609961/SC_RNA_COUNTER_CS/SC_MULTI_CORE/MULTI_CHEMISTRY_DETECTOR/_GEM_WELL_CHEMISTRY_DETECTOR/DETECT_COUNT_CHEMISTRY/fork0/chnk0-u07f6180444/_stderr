@@ -1,0 +1,6 @@
+[stderr]
+[cr_types/src/sample_def.rs:152] &self.parse_sample_names() = Some(
+    [
+        "SRR18609961",
+    ],
+)

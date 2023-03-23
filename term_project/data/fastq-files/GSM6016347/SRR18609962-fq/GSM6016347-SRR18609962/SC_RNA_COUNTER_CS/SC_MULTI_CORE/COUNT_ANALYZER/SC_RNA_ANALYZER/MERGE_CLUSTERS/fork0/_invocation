@@ -1,0 +1,8 @@
+@include "rna/_sc_rna_analyzer_stages.mro"
+
+call MERGE_CLUSTERS(
+    matrix_h5   = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u2b3c1828a4/files/preprocessed_matrix_h5.h5",
+    pca_h5      = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u2b3c1828b4/files/pca_h5.h5",
+    clusters_h5 = "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_GRAPH_CLUSTERING/fork0/join-u2b3c1828b7/files/clusters_h5.h5",
+    skip        = false,
+)

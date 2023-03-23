@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 9376842,
+    "timestamp": "2023-03-20 03:52:05",
+    "paths": [
+        "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/SUMMARIZE_REPORTS/fork0/chnk0-u07f618109e/files/ws_data.json"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T03:51:58-04:00",
+            "DeltaBytes": 13304002
+        },
+        {
+            "Timestamp": "2023-03-20T03:52:05.952542741-04:00",
+            "DeltaBytes": -9376842
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "is_antibody_only": false,
+    "matrix_h5": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u2b3c1828a4/files/preprocessed_matrix_h5.h5",
+    "num_bcs": null,
+    "num_genes": null,
+    "num_pcs": null,
+    "random_seed": null,
+    "skip": false
+}

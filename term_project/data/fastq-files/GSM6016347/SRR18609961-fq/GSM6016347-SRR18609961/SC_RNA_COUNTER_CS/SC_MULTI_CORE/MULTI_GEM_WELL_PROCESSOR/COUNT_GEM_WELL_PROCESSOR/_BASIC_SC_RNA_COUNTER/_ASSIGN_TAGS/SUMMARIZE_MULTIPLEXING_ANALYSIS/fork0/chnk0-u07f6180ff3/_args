@@ -1,0 +1,12 @@
+{
+    "__mem_gb": 4,
+    "__threads": 1,
+    "__vmem_gb": 7,
+    "assignment_confidence_table": null,
+    "cells_per_tag": null,
+    "marginal_tag_frequencies": null,
+    "tag_calls_per_cell": null,
+    "tag_calls_summary": null,
+    "tag_umi_thresholds_csv": null,
+    "tag_umi_thresholds_json": null
+}

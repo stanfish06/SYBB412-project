@@ -1,0 +1,31 @@
+[stderr]
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py:349: NumbaWarning: 
+Compilation is falling back to object mode WITH looplifting enabled because Function "fuzzy_simplicial_set" failed type inference due to: Untyped global name 'nearest_neighbors': cannot determine Numba type of <class 'function'>
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py", line 467:
+def fuzzy_simplicial_set(
+    <source elided>
+    if knn_indices is None or knn_dists is None:
+        knn_indices, knn_dists, _ = nearest_neighbors(
+        ^
+
+  @numba.jit()
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/object_mode_passes.py:178: NumbaWarning: Function "fuzzy_simplicial_set" was compiled in object mode without forceobj=True.
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py", line 350:
+@numba.jit()
+def fuzzy_simplicial_set(
+^
+
+  state.func_ir.loc))
+/usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/numba/core/object_mode_passes.py:188: NumbaDeprecationWarning: 
+Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.
+
+For more information visit https://numba.pydata.org/numba-doc/latest/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit
+
+File "../../../../../../../../../../../../usr/local/cellranger/6.0.1/external/anaconda/lib/python3.7/site-packages/umap/umap_.py", line 350:
+@numba.jit()
+def fuzzy_simplicial_set(
+^
+
+  state.func_ir.loc))

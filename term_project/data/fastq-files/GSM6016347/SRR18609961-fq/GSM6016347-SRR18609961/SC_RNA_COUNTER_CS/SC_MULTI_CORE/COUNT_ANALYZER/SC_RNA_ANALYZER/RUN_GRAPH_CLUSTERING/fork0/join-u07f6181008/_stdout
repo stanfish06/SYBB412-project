@@ -1,0 +1,31 @@
+[stdout]
+merge_nn	self_premaxrss_mb	109.4
+merge_nn	children_premaxrss_mb	109.4
+merge_nn	self_postmaxrss_mb	147.6
+merge_nn	children_postmaxrss_mb	35.6
+merge_nn	elapsed_sec	0
+nn	nn_nodes	4519.0000
+nn	nn_links	944471.0000
+nn	nn_density	0.0462
+tocoo	self_premaxrss_mb	147.6
+tocoo	children_premaxrss_mb	147.6
+tocoo	self_postmaxrss_mb	147.6
+tocoo	children_postmaxrss_mb	35.6
+tocoo	elapsed_sec	0
+convert	self_premaxrss_mb	147.6
+convert	children_premaxrss_mb	147.6
+Writing 944471 elements.
+convert	self_postmaxrss_mb	147.6
+convert	children_postmaxrss_mb	103.2
+convert	elapsed_sec	4
+louvain	self_premaxrss_mb	147.6
+louvain	children_premaxrss_mb	147.6
+louvain	self_postmaxrss_mb	147.6
+louvain	children_postmaxrss_mb	103.2
+louvain	elapsed_sec	0
+load_bcs	self_premaxrss_mb	147.6
+load_bcs	children_premaxrss_mb	147.6
+load_bcs	self_postmaxrss_mb	147.6
+load_bcs	children_postmaxrss_mb	103.2
+load_bcs	elapsed_sec	0
+Martian runtime detected. Try Num. = 1

@@ -1,0 +1,6 @@
+[
+    {
+        "feature_type": "Gene Expression",
+        "umap_dims": 2
+    }
+]

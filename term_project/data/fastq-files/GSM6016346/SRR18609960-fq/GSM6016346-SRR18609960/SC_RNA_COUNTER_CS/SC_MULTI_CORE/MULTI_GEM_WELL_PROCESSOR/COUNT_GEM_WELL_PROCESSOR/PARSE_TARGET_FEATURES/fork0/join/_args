@@ -1,0 +1,28 @@
+{
+    "__mem_gb": 4,
+    "__threads": 1,
+    "__vmem_gb": 7,
+    "gene_index": "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/FULL_COUNT_INPUTS/WRITE_GENE_INDEX/fork0/chnk0-u093d182175/files/gene_index.json",
+    "no_target_umi_filter": false,
+    "reference_path": "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+    "rps_limit": null,
+    "sample_def": [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/scratch/pbsjobs/job.18703647.hpc/SRR18609960_fastqs-folder",
+            "sample_indices": [
+                "any"
+            ],
+            "sample_names": [
+                "SRR18609960"
+            ],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null
+        }
+    ]
+}

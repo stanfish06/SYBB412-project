@@ -1,0 +1,28 @@
+{
+    "count": 2,
+    "size": 22055,
+    "timestamp": "2023-03-20 05:53:44",
+    "paths": [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u093d182c97/files/summary.json",
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u093d182c97/files/filtered_barcodes.csv"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2023-03-20T05:51:19-04:00",
+            "DeltaBytes": 7872
+        },
+        {
+            "Timestamp": "2023-03-20T05:51:28-04:00",
+            "DeltaBytes": 2185965
+        },
+        {
+            "Timestamp": "2023-03-20T05:52:12.590920891-04:00",
+            "DeltaBytes": -882
+        },
+        {
+            "Timestamp": "2023-03-20T05:53:44.390128523-04:00",
+            "DeltaBytes": -21173
+        }
+    ]
+}

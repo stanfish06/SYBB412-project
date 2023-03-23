@@ -1,0 +1,13 @@
+{
+    "barcode_counts": null,
+    "barcode_segment_counts": null,
+    "bc_correct_summary": null,
+    "feature_counts": null,
+    "feature_reference": null,
+    "invalid": null,
+    "paired_end": null,
+    "sequencing_metrics": null,
+    "summary": null,
+    "total_read_pairs": null,
+    "valid": null
+}

@@ -1,0 +1,18 @@
+Downloading GSM6016347 files:
+Downloading SRR18609961 files:
+SRR18609961_3.fastq SRR18609961_4.fastq SRR18609961.sra
+SRR18609961 download finised!
+Starting SRR18609961 trimming
+Starting fastqc for SRR18609961:
+SRR18609961 fastqc finnished!
+Starting alignment and counting for SRR18609961:
+SRR18609961 finished!
+Downloading SRR18609962 files:
+SRR18609962_3.fastq SRR18609962_4.fastq SRR18609962.sra
+SRR18609962 download finised!
+Starting SRR18609962 trimming
+Starting fastqc for SRR18609962:
+SRR18609962 fastqc finnished!
+Starting alignment and counting for SRR18609962:
+SRR18609962 finished!
+GSM6016347 all finished!

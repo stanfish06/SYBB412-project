@@ -1,0 +1,14 @@
+@include "rna/_sc_rna_analyzer_stages.mro"
+
+call RUN_UMAP(
+    matrix_h5        = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u5643181826/files/preprocessed_matrix_h5.h5",
+    pca_h5           = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u5643181831/files/pca_h5.h5",
+    skip             = false,
+    random_seed      = null,
+    n_neighbors      = null,
+    input_pcs        = null,
+    max_dims         = null,
+    min_dist         = null,
+    metric           = null,
+    is_antibody_only = false,
+)

@@ -1,0 +1,37 @@
+{
+  "chunks": [
+    {
+      "__mem_gb": 16,
+      "__threads": 4,
+      "__vmem_gb": null,
+      "range": {
+        "end": {
+          "gem_group": 1,
+          "sequence": "TGTTGGTTGATTGTAG",
+          "valid": false
+        },
+        "start": null
+      },
+      "read_ann_subsample_rate": 1.0
+    },
+    {
+      "__mem_gb": 19,
+      "__threads": 4,
+      "__vmem_gb": null,
+      "range": {
+        "end": null,
+        "start": {
+          "gem_group": 1,
+          "sequence": "TGTTGGTTGATTGTAG",
+          "valid": false
+        }
+      },
+      "read_ann_subsample_rate": 1.0
+    }
+  ],
+  "join": {
+    "__mem_gb": 16,
+    "__threads": null,
+    "__vmem_gb": null
+  }
+}

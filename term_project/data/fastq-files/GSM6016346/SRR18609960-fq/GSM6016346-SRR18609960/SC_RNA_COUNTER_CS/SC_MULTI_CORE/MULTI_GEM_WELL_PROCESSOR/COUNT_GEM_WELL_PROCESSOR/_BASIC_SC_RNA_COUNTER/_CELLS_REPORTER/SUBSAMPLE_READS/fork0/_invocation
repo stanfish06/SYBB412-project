@@ -1,0 +1,7 @@
+@include "rna/_basic_sc_rna_counter_stages.mro"
+
+call SUBSAMPLE_READS(
+    molecule_info     = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_CELLS_REPORTER/WRITE_MOLECULE_INFO/fork0/chnk0-u093d182ca5/files/molecule_info_non_multiplexed.h5",
+    filtered_barcodes = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609960/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u093d182c97/files/filtered_barcodes.csv",
+    target_mode       = null,
+)

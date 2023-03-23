@@ -1,0 +1,5 @@
+{
+    "sample_outs": {},
+    "unassigned_alignments": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/STRUCTIFY_PER_SAMPLE_OUTS/fork0/chnk0-u07f6180ff4/files/unassigned_alignments.bam",
+    "unassigned_alignments_index": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609961/SC_RNA_COUNTER_CS/SC_MULTI_CORE/STRUCTIFY_PER_SAMPLE_OUTS/fork0/chnk0-u07f6180ff4/files/unassigned_alignments_index.bam.bai"
+}

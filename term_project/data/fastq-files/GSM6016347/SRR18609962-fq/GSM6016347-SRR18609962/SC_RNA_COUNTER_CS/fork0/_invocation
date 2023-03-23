@@ -1,0 +1,34 @@
+@include "rna/sc_rna_counter_cs.mro"
+
+call SC_RNA_COUNTER_CS(
+    sample_id             = "GSM6016347-SRR18609962",
+    sample_def            = [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/scratch/pbsjobs/job.18703648.hpc/SRR18609962_fastqs-folder",
+            "sample_indices": ["any"],
+            "sample_names": ["SRR18609962"],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null,
+        },
+    ],
+    sample_desc           = "",
+    reference_path        = "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+    recovered_cells       = null,
+    no_bam                = true,
+    no_secondary_analysis = false,
+    no_target_umi_filter  = false,
+    force_cells           = null,
+    include_introns       = false,
+    chemistry             = "auto",
+    r1_length             = null,
+    r2_length             = null,
+    trim_polya_min_score  = 20,
+    trim_tso_min_score    = 20,
+    feature_reference     = null,
+)

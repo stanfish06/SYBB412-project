@@ -1,0 +1,4 @@
+{
+    "disable_legacy_bam": true,
+    "disable_sample_bams": true
+}

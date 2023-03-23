@@ -1,0 +1,8 @@
+{
+    "__mem_gb": 6,
+    "__threads": 1,
+    "__vmem_gb": 9,
+    "filtered_barcodes": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u2b3c182873/files/filtered_barcodes.csv",
+    "molecule_info": "/scratch/pbsjobs/job.18703648.hpc/GSM6016347-SRR18609962/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_CELLS_REPORTER/WRITE_MOLECULE_INFO/fork0/chnk0-u2b3c182888/files/molecule_info_non_multiplexed.h5",
+    "target_mode": null
+}

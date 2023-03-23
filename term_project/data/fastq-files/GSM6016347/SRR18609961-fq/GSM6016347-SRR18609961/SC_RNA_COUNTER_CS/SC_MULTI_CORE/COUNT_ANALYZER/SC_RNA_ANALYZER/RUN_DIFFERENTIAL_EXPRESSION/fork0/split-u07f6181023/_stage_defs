@@ -1,0 +1,57 @@
+{
+    "chunks": [
+        {
+            "clustering_key": "graphclust",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_10_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_2_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_3_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_4_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_5_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_6_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_7_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_8_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        },
+        {
+            "clustering_key": "kmeans_9_clusters",
+            "__mem_gb": 3,
+            "__threads": 4
+        }
+    ],
+    "join": {
+        "__mem_gb": 1
+    }
+}

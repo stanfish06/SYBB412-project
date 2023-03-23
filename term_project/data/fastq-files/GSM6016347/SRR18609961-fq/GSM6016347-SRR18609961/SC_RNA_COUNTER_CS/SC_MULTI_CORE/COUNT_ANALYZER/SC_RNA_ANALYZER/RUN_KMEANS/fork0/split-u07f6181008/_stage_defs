@@ -1,0 +1,40 @@
+{
+    "chunks": [
+        {
+            "n_clusters": 2,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 3,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 4,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 5,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 6,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 7,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 8,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 9,
+            "__mem_gb": 3.0
+        },
+        {
+            "n_clusters": 10,
+            "__mem_gb": 3.0
+        }
+    ]
+}

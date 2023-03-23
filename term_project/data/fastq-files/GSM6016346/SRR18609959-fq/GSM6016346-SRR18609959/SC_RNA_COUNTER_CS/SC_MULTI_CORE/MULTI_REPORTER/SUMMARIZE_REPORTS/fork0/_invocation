@@ -1,0 +1,24 @@
+@include "rna/_sc_rna_counter_stages.mro"
+
+call SUMMARIZE_REPORTS(
+    summaries                    = [
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/MERGE_METRICS/fork0/chnk0-u5643181885/files/summary.json",
+        "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/SUMMARIZE_ANALYSIS/fork0/join-u5643181891/files/summary.json",
+        null,
+        null,
+        null,
+    ],
+    sample_id                    = "GSM6016346-SRR18609959",
+    sample_desc                  = "",
+    reference_path               = "/scratch/users/zxy441/term_project/data/human-reference/hg38-genome",
+    analysis                     = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/SUMMARIZE_ANALYSIS/fork0/join-u5643181891/files/analysis",
+    barcode_summary_h5           = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/WRITE_BARCODE_SUMMARY/fork0/chnk0-u564318175f/files/barcode_summary.h5",
+    filtered_gene_bc_matrices_h5 = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u5643181761/files/filtered_matrices_h5.h5",
+    filtered_barcodes            = "/scratch/pbsjobs/job.18703647.hpc/GSM6016346-SRR18609959/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u5643181761/files/filtered_barcodes.csv",
+    barcode_whitelist            = "737K-august-2016",
+    gem_groups                   = [1],
+    feature_reference            = null,
+    target_set_name              = null,
+    per_feature_metrics_csv      = null,
+    include_introns              = false,
+)

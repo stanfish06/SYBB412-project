@@ -1,0 +1,4 @@
+[stdout]
+Median UMIs of initial cell calls: 465.0
+Min UMIs: 500
+Failed at attempt to call non-ambient barcodes in GEM well 1

@@ -1,0 +1,8 @@
+{
+    "disable_antibody": true,
+    "disable_crispr": true,
+    "disable_legacy_stages": false,
+    "disable_library_cloupe": false,
+    "disable_multiplexing": true,
+    "disable_targeted": true
+}

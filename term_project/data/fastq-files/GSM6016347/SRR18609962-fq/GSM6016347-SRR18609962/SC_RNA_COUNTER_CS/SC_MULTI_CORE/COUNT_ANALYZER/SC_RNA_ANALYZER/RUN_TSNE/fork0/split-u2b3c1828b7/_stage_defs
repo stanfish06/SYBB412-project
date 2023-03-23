@@ -1,0 +1,12 @@
+{
+    "chunks": [
+        {
+            "tsne_dims": 2,
+            "feature_type": "Gene Expression",
+            "__mem_gb": 3
+        }
+    ],
+    "join": {
+        "__mem_gb": 1
+    }
+}
