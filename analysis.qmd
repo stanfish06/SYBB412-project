@@ -1,0 +1,1455 @@
+---
+title: "Term project analysis"
+format: 
+  html:
+    toc: true
+    code-fold: true
+    fig-width: 8
+    fig-height: 6
+    number-sections: true
+    html-math-method: katex
+    smooth-scroll: true
+---
+
+```{r setup, include=FALSE}
+library(Biobase)
+library(Seurat)
+library(tidyverse)
+library(ggplot2)
+library(sctransform)
+library(SoupX)
+library(Matrix)
+library(patchwork)
+library(GEOquery)
+library(aod)
+library(car)
+library(ggsci)
+library(ggrepel)
+library(CellChat)
+library(fgsea)
+library(KEGGREST)
+library(msigdb)
+```
+
+# Ambient RNA correction
+
+<!-- Run this only once -->
+
+> Processing steps:
+
+-   Read in filtered count matrix
+
+-   Construct SoupChannel object using only the filtered count matrix
+
+    -   Only using the filtered count matrix instead of the raw count matrix (<b style="color:red;"> all droplets </b>) could make the estimations of the conditional contaminant-gene fractions inaccurate, but unfortunately, I didn't save the raw count matrix.
+
+-   Build <i> Seurat </i> object with filtered count matrix
+
+-   Normalize the matrix using <i> ScTransform </i>
+
+-   SNN based clustering
+
+-   Provide clustering result to SoupChannel
+
+-   Estimate $\rho$, expected proportion of contaminant-count fraction in one cell, and $o$, expected ambiant RNA count.
+
+-   Correct the matrix and modify the <i> Seurat </i> object.
+
+```{r eval=FALSE}
+out <- list.dirs(
+  path = '../counts/'
+) %>% grep(
+  pattern = 'filtered_feature_bc_matrix$',
+  value = TRUE
+) %>% 
+  {
+    # Loading each filtered count matrix
+    # Unfortunately, I didn't keep the raw matrix,
+    # so the tod option for SoupChannel will be the same as toc
+    seurat_objs <- list()
+    soup_objs <- list()
+    for (out_folder in .)
+    {
+      sample_name <- str_split(out_folder, fixed('/')) %>% 
+        unlist() %>% 
+        {grep('^GSM.*-SRR.*', ., value = TRUE)} %>% 
+        str_split(fixed('-')) %>% 
+        unlist()
+          
+      data_set <- Read10X(data.dir = out_folder)
+      # Initial soup channel
+      soup_channel <- SoupChannel(
+        data_set,
+        data_set,
+        calcSoupProfile = FALSE
+      )
+      soupProf <- data.frame(
+        row.names = rownames(data_set), 
+        est = rowSums(data_set)/sum(data_set), 
+        counts = rowSums(data_set)
+      )
+      soup_channel <- setSoupProfile(soup_channel, soupProf)
+      
+      # Initial seurat object
+      seurat_obj <- CreateSeuratObject(data_set)
+      seurat_obj <- PercentageFeatureSet(
+        seurat_obj, 
+        pattern = '^MT-', 
+        col.name = 'percent.mt'
+      )
+      seurat_obj <- SCTransform(
+        seurat_obj, 
+        method = "glmGamPoi", 
+        vars.to.regress = "percent.mt", 
+        verbose = FALSE
+      )
+      seurat_obj <- RunPCA(seurat_obj, verbose = FALSE)
+      seurat_obj <- RunUMAP(seurat_obj, dims = 1:30, verbose = FALSE)
+      seurat_obj <- FindNeighbors(seurat_obj, dims = 1:30, verbose = FALSE)
+      seurat_obj <- FindClusters(seurat_obj, verbose = FALSE)
+      meta <- seurat_obj@meta.data
+      umap <- seurat_obj@reductions$umap@cell.embeddings
+      
+      # Updated soup channel
+      soup_channel <- setClusters(
+        soup_channel, 
+        setNames(meta$seurat_clusters, rownames(meta))
+      )
+      soup_channel <- setDR(soup_channel, umap)
+      # Estimated rho
+      soup_channel  <- autoEstCont(
+        soup_channel, 
+        verbose = FALSE, 
+        doPlot = FALSE
+      )
+      
+      if (dir.exists(paste0(out_folder, '/ambient_corrected_matrix')))
+      {
+        unlink(paste0(out_folder, '/ambient_corrected_matrix'), recursive = TRUE)
+      }
+      # Round to int count
+      adj_matrix  <- adjustCounts(soup_channel, roundToInt = TRUE)
+      DropletUtils:::write10xCounts(
+        paste0(out_folder, '/ambient_corrected_matrix'), 
+        adj_matrix
+      )
+      if (is.null(soup_objs[[sample_name[1]]]))
+      {
+        soup_objs[[sample_name[1]]] <- setNames(list(soup_channel), sample_name[2]) 
+      }
+      else
+      {
+        soup_objs[[sample_name[1]]][[sample_name[2]]] <- 
+          soup_channel
+      }
+      # Updated count matrix and seurat object
+      data_set <- Read10X(
+        data.dir = paste0(out_folder, '/ambient_corrected_matrix')
+      )
+      seurat_obj <- CreateSeuratObject(data_set)
+      if (is.null(seurat_objs[[sample_name[1]]]))
+      {
+        seurat_objs[[sample_name[1]]] <- setNames(
+        list(CreateSeuratObject(data_set)), sample_name[2]
+        ) 
+      }
+      else
+      {
+        seurat_objs[[sample_name[1]]][[sample_name[2]]] <- 
+          CreateSeuratObject(data_set)
+      }
+    }
+    list(seurat_objs, soup_objs)
+  }
+save(out, file = 'soup-seurat-data.rda')
+rm(out)
+```
+
+# Data selection, visualisation, and QC
+
+::: panel-tabset
+## Selecting the sample for each patient
+
+```{r eval=FALSE}
+load('soup-seurat-data.rda')
+seurat_obj_filtered <- lapply(
+  out[[1]],
+  FUN = function(x) {
+    if (length(x) == 2)
+    {
+      sample1_num_entry <- prod(dim(x[[1]]))
+      sample2_num_entry <- prod(dim(x[[2]]))
+      if (sample1_num_entry > sample2_num_entry)
+      {
+        return(x[[1]])
+      }
+      else
+      {
+        return(x[[2]])
+      }
+    }
+    else
+    {
+      x[[1]]
+    }
+  }
+)
+save(seurat_obj_filtered, file = 'seurat_obj_subset.rda')
+```
+
+For patients with two samples, we will select the count matrix with more features and more cells. More features are useful in clustering to identify small clusters, and more cells are important to ensure the statistical power and a larger coverage of the cellular landscape.
+
+## Visualizing the data
+
+```{r}
+# Find the percentage of mitochondria genes in each sample
+load('seurat_obj_subset.rda')
+seurat_obj_filtered_mt <- lapply(
+  seurat_obj_filtered,
+  FUN = function(x) {
+    x[['percent.mt']] <- PercentageFeatureSet(object = x, pattern = '^MT-')
+    return(x)
+  }
+)
+rm(seurat_obj_filtered)
+```
+
+### Number of detected genes, Sequencing depth per cell, and Percentage of mitochondria genes
+
+```{r}
+lapply(
+  seurat_obj_filtered_mt,
+  FUN = function(x) {
+    VlnPlot(
+      x, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3
+    )
+  }
+)
+```
+
+```{r}
+g_filter <- lapply(
+  seurat_obj_filtered_mt,
+  FUN = function(x) {
+    data.frame(
+      x[['nCount_RNA']],
+      x[['nFeature_RNA']]
+    ) %>% {
+      print(
+        ggplot(., aes(x = nCount_RNA)) + 
+        geom_histogram(binwidth = 100) +
+          geom_vline(xintercept = 1000, color = 'red') +
+          geom_vline(xintercept = 1000, color = 'red')
+      ) 
+      print(
+        ggplot(., aes(x = nFeature_RNA)) +
+          geom_histogram(binwidth = 100) +
+          geom_vline(xintercept = 500, color = 'blue')
+      )
+    }
+  }
+)
+
+g <- Reduce('+', g_filter) + plot_layout(ncol = 8)
+```
+
+## Filtering cells
+
+```{r eval=FALSE}
+seurat_obj_filtered_mt_QC <- lapply(
+  seurat_obj_filtered_mt,
+  FUN = function(x) {
+    subset(
+      x,
+      subset = 
+        nCount_RNA > 1000 &
+        nFeature_RNA > 500 &
+        percent.mt < 10
+    )
+  }
+)
+save(seurat_obj_filtered_mt_QC, file = 'seurat_obj_filtered_mt_QC.rda')
+```
+
+```{r}
+rm(seurat_obj_filtered_mt)
+load('seurat_obj_filtered_mt_QC.rda')
+lapply(
+  seurat_obj_filtered_mt_QC,
+  FUN = function(x) {
+    VlnPlot(
+      x, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3
+    )
+  }
+)
+```
+
+## Normalization
+
+> SCTransform is used for normalization
+
+```{r eval=FALSE}
+seurat_obj_filtered_mt_QC_normal <- lapply(
+  seurat_obj_filtered_mt_QC,
+  FUN = SCTransform,
+  method = "glmGamPoi", 
+  vars.to.regress = "percent.mt", 
+  verbose = FALSE
+)
+save(seurat_obj_filtered_mt_QC_normal, file = 'seurat_obj_filtered_mt_QC_normal.rda')
+```
+:::
+
+# Cell Type annotation
+
+> Some considerations
+
+-   We decided to use <i> CellTypist </i> for annotation because it was originally designed to annotate cross-tissue immune cells, and since the paper we used also target on immune cells, we think this might be good tool to use.
+
+-   <i> CellTypist </i> is implemented in Python. To make the report concise and easy to follow, we decided to use <i> reticulate </i> in R to run CellTypist.
+
+::: panel-tabset
+## Python env and datasets
+
+```{r eval=FALSE}
+rm(list = ls())
+gc()
+load('seurat_obj_filtered_mt_QC.rda')
+library(reticulate)
+library(scater)
+library(SeuratDisk)
+use_condaenv('CellTypistAnnotation', 
+             conda = '/Users/zhiyu/anaconda3/Scripts/conda')
+# Convert seurat to annData, which is a scRNA data structure in python
+mapply(
+  FUN = function(seurat, patient) {
+    SaveH5Seurat(seurat, filename = paste0(patient, ".h5Seurat"))
+    Convert(paste0(patient, ".h5Seurat"), dest = "h5ad")
+  },
+  seurat = seurat_obj_filtered_mt_QC,
+  patient = names(seurat_obj_filtered_mt_QC)
+)
+```
+
+## Annotation
+
+```{python, eval=FALSE}
+import celltypist
+from celltypist import models
+import scanpy as sc
+import scipy
+import anndata as ad
+import glob
+# Downloading annotation models. Not going to run this again.
+# models.download_models(force_update = True)
+models.models_path
+models.models_description()
+count_data = r.count_mat
+cell_type_label = {}
+model = models.Model.load(model = "Immune_All_Low.pkl")
+#r.seurat_obj_filtered_mt_QC
+all_anndata = glob.glob('GSM*.h5ad')
+for file in all_anndata:
+  # Normalize the cell count to 10^4
+  adata = sc.read_h5ad(file)
+  sc.pp.normalize_per_cell(adata, counts_per_cell_after = 10**4)
+  sc.pp.log1p(adata)
+  # CellTypist accepts dense matrix
+  adata.X = adata.X.toarray()
+  predictions_low = celltypist.annotate(
+    adata, model = model, majority_voting = True
+  )
+  predictions_low_adata = predictions_low.to_adata()
+  cell_type_label[file] = predictions_low_adata.obs.loc[
+    adata.obs.index, "majority_voting"].tolist()
+```
+
+```{r}
+cell_label <- py$cell_type_label
+names(cell_label) <- gsub('\\.h5ad', '',names(cell_label))
+save(cell_label, file = 'cell_label_each_sample.rda')
+rm(list = ls())
+```
+
+## Add cell annotation to meta
+
+```{r}
+load('seurat_obj_subset_QC_normal.rda')
+load('cell_label_each_sample.rda')
+seurat_obj_filtered_mt_QC_normal_annotated <- mapply(
+  FUN = function(seurat, patient) {
+    lab <- cell_label[[patient]]
+    return(AddMetaData(seurat, lab, col.name = 'cell_type'))
+  },
+  seurat = seurat_obj_filtered_mt_QC_normal,
+  patient = names(seurat_obj_filtered_mt_QC_normal)
+)
+save(seurat_obj_filtered_mt_QC_normal_annotated, 
+     file = 'seurat_obj_filtered_mt_QC_normal_annotated.rda')
+rm(list = ls())
+```
+:::
+
+# Integration, visualization, and annotation
+
+::: panel-tabset
+## One issue and our solution
+
+> A problem and workaround
+
+-   While the original plan was to integrate all 48 patients' datasets, it turned out to be implausible.
+
+    -   I have tried to run the code below with 176 RAMS on HPC, and it was still not enough.
+
+-   As a workaround, we decided to generate two integrated Seurat objects
+
+    -   The first integrated Seurat object comes from
+
+    -   
+
+```{r eval=FALSE}
+# Don't run
+# Clean up
+rm(list = ls())
+gc()
+load('seurat_obj_filtered_mt_QC_normal_annotated.rda')
+features <- SelectIntegrationFeatures(
+  object.list = seurat_obj_filtered_mt_QC_normal_annotated, nfeatures = 5000
+)
+seurat_obj_filtered_mt_QC_normal <- PrepSCTIntegration(
+  object.list = seurat_obj_filtered_mt_QC_normal_annotated, 
+  anchor.features = features
+)
+immune.anchors <- FindIntegrationAnchors(
+  object.list = seurat_obj_filtered_mt_QC_normal_annotated, 
+  normalization.method = 'SCT',
+  anchor.features = features
+)
+save(immune.anchors, file = 'integration_anchor.rda')
+immune_integrated_data <- IntegrateData(
+  anchorset = immune.anchors,
+  normalization.method = 'SCT'
+)
+save(immune_integrated_data, file = 'immune_integrated_data.rda')
+```
+
+## Selecting patients
+
+> Some considerations
+
+-   Biased sub-sampling can create biased models (e.g. regulatory network) in the downstream analyses. So, I decided to choose 10 healthy patients and 10 cognitively impaired (CI) patients.
+
+    -   There should be 5 males and 5 females in each group (healthy or CI).
+
+    -   Ages of patients in each group should span a large range.
+
+    -   Age distributions between two groups should be similar.
+
+```{r}
+gc()
+geo_files <- getGEO('GSE200164', GSEMatrix = TRUE)
+patient_info <- pData(geo_files[[1]])
+```
+
+```{r}
+load('seurat_obj_filtered_mt_QC_normal_annotated.rda')
+available_patients <- patient_info %>% 
+  mutate(
+    age_num = as.numeric(
+      str_extract(characteristics_ch1.2, '(age:\\s)(\\d\\d)', group = 2)
+    )
+  ) %>% 
+  filter(rownames(patient_info) %in% 
+           names(seurat_obj_filtered_mt_QC_normal_annotated))
+available_patients %>% select(age_num, `Sex:ch1`, `diagnosis:ch1`) %>% 
+  filter(`diagnosis:ch1` == 'MCI/AD') %>% tally()
+
+available_patients %>% select(age_num, `Sex:ch1`, `diagnosis:ch1`) %>% 
+  filter(`diagnosis:ch1` == 'MCI/AD') %>% arrange(age_num) %>% 
+  dplyr::slice(1, 2, 4, 6, 9, 10, 11, 12, 13, 14) %>% knitr::kable()
+
+selected_CI_patients <- available_patients %>% 
+  select(age_num, `Sex:ch1`, `diagnosis:ch1`) %>% 
+  filter(`diagnosis:ch1` == 'MCI/AD') %>% 
+  arrange(age_num) %>% 
+  dplyr::slice(1, 2, 4, 6, 9, 10, 11, 12, 13, 14) %>% 
+  rownames()
+
+available_patients %>% select(age_num, `Sex:ch1`, `diagnosis:ch1`) %>% 
+  filter(`diagnosis:ch1` == 'Healthy') %>% arrange(age_num) %>% 
+  dplyr::slice(1, 2, 4, 5, 21, 22, 28, 29, 30, 32) %>% knitr::kable()
+
+selected_Healthy_patients <- available_patients %>% 
+  select(age_num, `Sex:ch1`, `diagnosis:ch1`) %>% 
+  filter(`diagnosis:ch1` == 'Healthy') %>% 
+  arrange(age_num) %>% 
+  dplyr::slice(1, 2, 4, 5, 21, 22, 28, 29, 30, 32) %>% 
+  rownames()
+
+# write.csv(
+#   data.frame(
+#     health = selected_Healthy_patients,
+#     CI = selected_CI_patients
+#   ),
+#   file = 'selected_patient_id.txt',
+#   row.names = FALSE
+# )
+```
+
+## Integration
+
+### Healthy patient integrated dataset
+
+```{r eval=FALSE}
+# Clean up
+rm(list = setdiff(ls(), c('selected_CI_patients', 'selected_Healthy_patients')))
+gc()
+load('seurat_obj_filtered_mt_QC_normal_annotated.rda')
+healthy_seurat_list <- 
+  seurat_obj_filtered_mt_QC_normal_annotated[selected_Healthy_patients]
+features <- SelectIntegrationFeatures(
+  object.list = healthy_seurat_list, nfeatures = 5000
+)
+seurat_obj_filtered_mt_QC_normal <- PrepSCTIntegration(
+  object.list = healthy_seurat_list, 
+  anchor.features = features
+)
+immune.anchors <- FindIntegrationAnchors(
+  object.list = seurat_obj_filtered_mt_QC_normal, 
+  normalization.method = 'SCT',
+  anchor.features = features
+)
+immune_integrated_data <- IntegrateData(
+  anchorset = immune.anchors,
+  normalization.method = 'SCT'
+)
+healthy_integrated_data <- immune_integrated_data
+save(healthy_integrated_data, file = 'healthy_integrated_data.rda')
+rm(list = setdiff(ls(), c('selected_CI_patients', 'selected_Healthy_patients')))
+gc()
+```
+
+### CI patient integrated dataset
+
+```{r eval=FALSE}
+# Clean up
+rm(list = setdiff(ls(), c('selected_CI_patients', 'selected_Healthy_patients')))
+gc()
+load('seurat_obj_filtered_mt_QC_normal_annotated.rda')
+CI_seurat_list <- 
+  seurat_obj_filtered_mt_QC_normal_annotated[selected_CI_patients]
+features <- SelectIntegrationFeatures(
+  object.list = CI_seurat_list, nfeatures = 5000
+)
+seurat_obj_filtered_mt_QC_normal <- PrepSCTIntegration(
+  object.list = CI_seurat_list, 
+  anchor.features = features
+)
+immune.anchors <- FindIntegrationAnchors(
+  object.list = seurat_obj_filtered_mt_QC_normal, 
+  normalization.method = 'SCT',
+  anchor.features = features
+)
+immune_integrated_data <- IntegrateData(
+  anchorset = immune.anchors,
+  normalization.method = 'SCT'
+)
+CI_integrated_data <- immune_integrated_data
+save(CI_integrated_data, file = 'CI_integrated_data.rda')
+rm(list = setdiff(ls(), c('selected_CI_patients', 'selected_Healthy_patients')))
+gc()
+```
+
+## Visualization
+
+### Healthy
+
+```{r}
+load('healthy_integrated_data.rda')
+load('CI_integrated_data.rda')
+healthy_integrated_data <- RunPCA(healthy_integrated_data, verbose = FALSE)
+healthy_integrated_data <- RunUMAP(healthy_integrated_data, reduction = "pca", dims = 1:30)
+CI_integrated_data <- RunPCA(CI_integrated_data, verbose = FALSE)
+CI_integrated_data <- RunUMAP(CI_integrated_data, reduction = "pca", dims = 1:30)
+```
+
+```{r}
+DimPlot(
+  healthy_integrated_data, 
+  reduction = "umap", 
+  group.by = "cell_type", 
+  label = TRUE,
+  repel = TRUE,
+  label.size = 3
+)
+DimPlot(
+  CI_integrated_data, 
+  reduction = "umap", 
+  group.by = "cell_type", 
+  label = TRUE,
+  repel = TRUE,
+  label.size = 3
+)
+```
+:::
+
+# Differential Exprssion Analysis
+
+::: panel-tabset
+
+## Correlation between sex and age
+
+```{r}
+rm(list = ls())
+gc()
+load('seurat_obj_filtered_mt_QC_normal_annotated.rda')
+geo_files <- getGEO('GSE200164', GSEMatrix = TRUE)
+patient_info <- pData(geo_files[[1]])
+```
+
+```{r}
+available_patients <- patient_info %>% 
+  mutate(
+    age_num = as.numeric(
+      str_extract(characteristics_ch1.2, '(age:\\s)(\\d\\d)', group = 2)
+    )
+  ) %>% 
+  filter(rownames(patient_info) %in% names(seurat_obj_filtered_mt_QC_normal_annotated)) 
+
+sex_vec <- ifelse(available_patients$`Sex:ch1` == 'Female', 0, 1)
+age_vec <- available_patients$age_num
+cor.test(age_vec, sex_vec)
+
+# Female is 0, and Male is 1
+patient_info_DE <- available_patients %>% 
+  dplyr::select(age_num, `Sex:ch1`) %>% 
+  dplyr::mutate(sex = sex_vec) %>% 
+  dplyr::select(!`Sex:ch1`)
+```
+
+-   Correlation is low, which is good as the parameter estimations will be reliable.
+
+## Function used to do DE
+
+> Some considerations
+
+-   Benjamin-Hochberg correction with FDR set to 0.05.
+
+-   For simplicity, I chose two hypothesis testing methods that do not require an assumption on the likelihood model. (The paper only uses Anova)
+
+    -   Anova with two approaches (Type II SS and Type III SS are used to avoid the effect of the sequence of adding the predictors)
+
+    -   Wald test
+
+-   Type II SS is used to test if main effect of age or sex significantly affect the express given the main effect of sex or age, so the sequence does not matter.
+
+-   Type III SS is used to test if main effect of age or sex significantly affect the express given the main effect of sex or age and the interaction effect of sex and age.
+
+-   Type II SS will be statistically more powerful if there is indeed no interaction. However, Type III can avoid false positive main effects when one variable is actually the effect modifier.
+
+-   Thus, Type III is more conservative than Type II, meaning that a test positive main effect in Type III is likely to be test positive in Type II.
+
+-   Genes that are present in less than 20% of the target cell type are dropped.
+
+-   Different from the paper, we investigated the possible interaction effect between sex and age.
+
+```{r}
+# Patient meta has to be a dataframe with each column being a predictor, and its
+# rownames should be the patient id.
+DE_analysis <- 
+  function(
+    cell_types, 
+    seurat_list, 
+    patient_meta,
+    predictors,
+    minimum_percent_cell_available = 0.1,
+    test = 'anova', 
+    padjust = 'BH',
+    fdr_threshold = 0.05) {
+    result <- list()
+    regression_data <- patient_meta
+    
+    for (ct in cell_types) {
+      seurat_subset_list <- lapply(
+        seurat_list,
+        FUN = function(seurat) {
+          tryCatch(
+           subset(x = seurat, subset = cell_type == ct),
+           error = function(cond) {
+             return(NULL)
+           }
+          )
+        }
+      )
+      selected_genes_per_sample <- lapply(
+        seurat_subset_list,
+        function(seurat) {
+          if (!is.null(seurat)) {
+            apply(
+            GetAssayData(seurat, slot = 'counts'),
+            MARGIN = 1,
+            FUN = function(gene) {
+              sum(gene != 0) / length(gene) > minimum_percent_cell_available
+              }
+            )
+          } else {
+            return(NULL)
+          }
+        }
+      )
+      common_genes <- selected_genes_per_sample[
+        !sapply(selected_genes_per_sample, is.null)
+      ] %>% 
+        lapply(FUN = function(genes) {
+          return(names(genes)[genes])
+        }) %>% 
+        {Reduce(intersect, .)}
+      result_temp <- lapply(
+        common_genes,
+        FUN = function(gene) {
+          expr_sample_selected_cells <- stack(lapply(
+            seurat_subset_list[!sapply(seurat_subset_list, is.null)],
+            FUN = function(seurat) {
+              GetAssayData(seurat, slot = 'counts')[gene, ]
+            } 
+          ))
+          regression_data <- merge(
+            regression_data, 
+            expr_sample_selected_cells, 
+            by.x = 'row.names', 
+            by.y = 'ind'
+          )
+          regression_data <- regression_data %>% 
+            dplyr::select(!Row.names) %>% 
+            dplyr::rename(expr_count = values)
+          # collapse combines the outputs into a single string
+          fml <- paste(
+            'expr_count', 
+            paste(predictors, collapse = ' + '), 
+            sep = '~'
+          )
+          model <- lm(as.formula(fml), data = regression_data)
+          if (test == 'anova') {
+            type1_result <- as.data.frame(anova(model))
+            type2_result <- as.data.frame(car::Anova(model, type = 'II'))
+            type3_result <- as.data.frame(car::Anova(model, type = 'III'))
+            gene_result_temp <- lapply(
+              predictors, 
+              FUN = function(p) {
+                return(list(
+                  type1 = c(type1_result[p, ], list(coefficient = coef(model)[p])),
+                  type2 = c(type2_result[p, ], list(coefficient = coef(model)[p])),
+                  type3 = c(type3_result[p, ], list(coefficient = coef(model)[p]))
+                ))
+              }
+            )
+            names(gene_result_temp) <- predictors
+            return(gene_result_temp)
+          } else if (test == 'wald') {
+            gene_result_temp <- list()
+            for (i in 1:length(predictors)) {
+              gene_result_temp[[predictors[i]]] <- c(aod::wald.test(
+                Sigma = vcov(model), b = coef(model), i
+              )$result$chi2, 'coefficient' = coef(model)[predictors[i]])
+            }
+            return(gene_result_temp)
+          } else {
+            stop('Input test type not supported. Available: anova or wald')
+          }
+          # reset really important!!
+          regression_data <- patient_meta
+        }
+      )
+      names(result_temp) <- common_genes
+      # BH correction
+      num_comparisons <- length(common_genes)
+      BH_scale_factor <- num_comparisons / 1:num_comparisons
+      if (test == 'anova') {
+        for (type in c('type1', 'type2', 'type3')) {
+          for (p in predictors) {
+            p_val <- sapply(
+              result_temp,
+              FUN = function(gene){gene[[p]][[type]]$`Pr(>F)`}
+            )
+            original_order <- names(p_val)
+            p_corrected_sorted <- (sort(p_val) * BH_scale_factor)
+            # Fisrt one that exceeds 0.05
+            # For all the original p values that are less than this gene's 
+            # original p value, we will reject them
+            if (sum(p_corrected_sorted > fdr_threshold) == 0) {
+              rejectOrNot <- p_val
+              # This one overwrites all elements
+              rejectOrNot[T] <- TRUE
+            } else if (sum(p_corrected_sorted > fdr_threshold) >- 1) {
+              ind <- min(which(p_corrected_sorted > fdr_threshold))
+              rejectOrNot <- p_val < p_val[names(p_corrected_sorted)[ind]] 
+            }
+            p_corrected <- p_corrected_sorted[original_order]
+            # For simplicity, you can also use the r built-in function shown below.
+            # Just for practice, I did BH by hand.
+            # p_corrected <- p.adjust(p_val, method = 'BH')
+            for (i in seq_along(result_temp)) {
+              gene_name <- names(result_temp)[i]
+              result_temp[[i]][[p]][[type]][['P_val_BH']] <- 
+                p_corrected[gene_name]
+              result_temp[[i]][[p]][[type]][['reject?']] <- 
+                rejectOrNot[gene_name]
+            }
+          }
+        }
+      } else if (test == 'wald') {
+        for (p in predictors) {
+            p_val <- sapply(
+              result_temp,
+              FUN = function(gene){gene[[p]]['P']}
+            )
+            original_order <- names(p_val)
+            p_corrected_sorted <- (sort(p_val) * BH_scale_factor)
+            # Fisrt one that exceeds 0.05
+            if (sum(p_corrected_sorted > fdr_threshold) == 0) {
+              rejectOrNot <- p_val
+              # This one overwrites all elements
+              rejectOrNot[T] <- TRUE
+            } else if (sum(p_corrected_sorted > fdr_threshold) >- 1) {
+              ind <- min(which(p_corrected_sorted > fdr_threshold))
+              rejectOrNot <- p_val < p_val[names(p_corrected_sorted)[ind]] 
+            }
+            p_corrected <- p_corrected_sorted[original_order]
+            for (i in seq_along(result_temp)) {
+              gene_name <- names(result_temp)[i]
+              gene_result_temp <- as.list(result_temp[[i]][[p]])
+              gene_result_temp[['P_val_BH']] <- 
+                p_corrected[paste0(gene_name, '.P')]
+              gene_result_temp[['reject?']] <- 
+                rejectOrNot[paste0(gene_name, '.P')]    
+              result_temp[[i]][[p]] <- gene_result_temp
+            }
+        }
+      }
+      result[[ct]] <- result_temp
+    }
+    return(result)
+}
+```
+
+
+```{r}
+# Volcano plot
+vol_plot <- function(DE_out, test = 'anova', type = 'type1', pred = 'age_num') {
+  mapply(
+    FUN = function(DE, cell_type) {
+      if (test == 'anova') {
+        out_df <- reshape2::melt(lapply(
+          DE,
+          FUN = function(gene) {
+            return(gene[[pred]][[type]][c('P_val_BH', 'reject?', 'coefficient')])
+          }
+        ))
+        out_df <- out_df %>% reshape2::dcast(L1 ~ L2, value.var = 'value')
+        out_df <- out_df %>% mutate(p_score = -log10(P_val_BH)) %>% mutate(
+          diff_expr = case_when(
+            coefficient < 0 & `reject?` == 1 ~ 'Down',
+            coefficient > 0 & `reject?` == 1 ~ 'Up',
+            `reject?` == 0 ~ 'Not DEG'
+          ),
+          gene_label = case_when(
+            coefficient < 0 & `reject?` == 1 ~ L1,
+            coefficient > 0 & `reject?` == 1 ~ L1,
+            `reject?` == 0 ~ NA
+          )
+        ) 
+        
+        min_coef_up <- 
+          out_df %>% filter(diff_expr == 'Up') %>% pull(coefficient) %>% min()
+        min_pscore_up <- 
+          out_df %>% filter(diff_expr == 'Up') %>% pull(p_score) %>% min()
+        max_coef_down <- 
+          out_df %>% filter(diff_expr == 'Down') %>% pull(coefficient) %>% max()
+        min_pscore_down <- 
+          out_df %>% filter(diff_expr == 'Down') %>% pull(p_score) %>% min()
+        
+        g <- out_df %>% ggplot(aes(x = coefficient, y = p_score, color = diff_expr)) +
+          geom_point() +
+          theme_bw() +
+          geom_text_repel(aes(label = gene_label)) +
+          scale_color_manual(
+            values = c(
+              'Up' = 'red',
+              'Down' = 'blue',
+              'Not DEG' = 'grey'
+            )
+          ) +
+          geom_vline(
+            xintercept=c(min_coef_up, max_coef_down), 
+            col = 'black', 
+            linetype = 'dashed'
+          ) +
+          geom_hline(
+            yintercept=min(min_pscore_up, min_pscore_down), 
+            col = 'black', 
+            linetype = 'dashed'
+          ) +
+          labs(
+            x = 'LM coefficient',
+            y = expression(-10*Log[10](p[BH])),
+            color = 'Test result',
+            title = paste0(cell_type, '\n', test, ' test-', type, '-SS for ', pred)
+          ) +
+          theme(
+            text = element_text(size = 15, face = 'bold'),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 12)
+          )
+        return(g)
+      } else if (test == 'wald') {
+        
+      } else {
+        stop('Test not supported. Avaiable: anova or wald.')
+      }
+    },
+    DE = DE_out,
+    cell_type = names(DE_out),
+    SIMPLIFY = FALSE
+  )
+}
+```
+
+
+## DE across age and sex
+
+### Cell Type Composition for different ages and sexes
+```{r}
+cell_type_each_patient <- stack(lapply(
+  seurat_obj_filtered_mt_QC_normal_annotated,
+  function(x) {
+    x$cell_type
+  }
+))
+patient_cell <- merge(
+  patient_info_DE, 
+  cell_type_each_patient,
+  by.x = 'row.names',
+  by.y = 'ind'
+) %>% mutate(
+  sex = case_match(
+    sex,
+    1 ~ 'male',
+    0 ~ 'female'
+  )
+)
+```
+
+```{r}
+cell_comp_per_age_per_sex <- patient_cell %>% add_count(age_num, sex) %>% 
+  group_by(age_num, sex, values, n) %>% 
+  summarise(cell_num = n()) %>% 
+  mutate(cell_prop = cell_num / n)
+```
+
+```{r}
+g_cell_prop <- cell_comp_per_age_per_sex %>% {
+  g <- ggplot(., aes(x = age_num, y = cell_prop)) +
+    geom_bar(stat = 'identity', aes(fill = values)) +
+    facet_wrap(
+      ~ sex,
+      ncol = 1,
+      labeller = labeller(sex = c(
+        "male" = "Male",
+        "female" = "Female"
+      ))
+    ) +
+    theme_bw() +
+    theme(
+      text = element_text(size = 15, face = 'bold'),
+      legend.text = element_text(size = 8),
+      legend.title = element_text(size = 8),
+      legend.key.size = unit(3, 'mm'),
+      legend.position = 'bottom'
+    ) +
+    guides(fill = guide_legend(ncol = 3)) +
+    labs(
+      x = 'Age',
+      y = 'Proportion',
+      fill = 'Cell Type'
+    )
+  print(g)
+}
+ggsave('cell-proportion-by-age-and-sex.png', plot = g_cell_prop, device = 'png', dpi = 300, width = 8, height = 10)
+```
+
+
+
+### Anova
+```{r eval=FALSE}
+out_anova <- DE_analysis(
+  cell_types = c(
+    'Regulatory T cells',
+    'DC',
+    'Tcm/Naive helper T cells',
+    'Tem/Trm cytotoxic T cells',
+    'Classical monocytes'
+  ),
+  seurat_list = seurat_obj_filtered_mt_QC_normal_annotated,
+  patient_meta = patient_info_DE,
+  test = 'anova',
+  predictors = c('age_num', 'sex', 'age_num:sex'),
+  minimum_percent_cell_available = 0.2,
+  fdr_threshold = 0.05
+)
+save(out_anova, file = 'DE_anova_result.rda')
+```
+
+```{r}
+anova_DE_plots <- vol_plot(
+  out_anova,
+  test = 'anova',
+  type = 'type2',
+  pred = 'age_num'
+)
+
+g_age_type2 <- Reduce(f = '+', anova_DE_plots) + plot_layout(
+  ncol = 3,
+  widths = c(1, 1),
+  heights = c(1, 1, 1),
+  guides = 'collect'
+) & theme(legend.position = 'bottom')
+
+anova_DE_plots <- vol_plot(
+  out_anova,
+  test = 'anova',
+  type = 'type3',
+  pred = 'age_num'
+)
+
+g_age_type3 <- Reduce(f = '+', anova_DE_plots) + plot_layout(
+  ncol = 3,
+  widths = c(1, 1),
+  heights = c(1, 1, 1),
+  guides = 'collect'
+) & theme(legend.position = 'bottom')
+
+ggsave('age_DE_anova_type2.png', g_age_type2, device = 'png', width = 15, height = 10)
+ggsave('age_DE_anova_type3.png', g_age_type3, device = 'png', width = 15, height = 10)
+```
+
+```{r}
+anova_DE_plots <- vol_plot(
+  out_anova,
+  test = 'anova',
+  type = 'type2',
+  pred = 'sex'
+)
+
+g_age_type2 <- Reduce(f = '+', anova_DE_plots) + plot_layout(
+  ncol = 3,
+  widths = c(1, 1),
+  heights = c(1, 1, 1),
+  guides = 'collect'
+) & theme(legend.position = 'bottom')
+
+anova_DE_plots <- vol_plot(
+  out_anova,
+  test = 'anova',
+  type = 'type3',
+  pred = 'sex'
+)
+
+g_age_type3 <- Reduce(f = '+', anova_DE_plots) + plot_layout(
+  ncol = 3,
+  widths = c(1, 1),
+  heights = c(1, 1, 1),
+  guides = 'collect'
+) & theme(legend.position = 'bottom')
+
+ggsave('sex_DE_anova_type2.png', g_age_type2, device = 'png', width = 15, height = 10)
+ggsave('sex_DE_anova_type3.png', g_age_type3, device = 'png', width = 15, height = 10)
+```
+
+```{r}
+anova_DE_plots <- vol_plot(
+  out_anova,
+  test = 'anova',
+  type = 'type2',
+  pred = 'age_num:sex'
+)
+
+g_age_type2 <- Reduce(f = '+', anova_DE_plots) + plot_layout(
+  ncol = 3,
+  widths = c(1, 1),
+  heights = c(1, 1, 1),
+  guides = 'collect'
+) & theme(legend.position = 'bottom')
+
+anova_DE_plots <- vol_plot(
+  out_anova,
+  test = 'anova',
+  type = 'type3',
+  pred = 'age_num:sex'
+)
+
+g_age_type3 <- Reduce(f = '+', anova_DE_plots) + plot_layout(
+  ncol = 3,
+  widths = c(1, 1),
+  heights = c(1, 1, 1),
+  guides = 'collect'
+) & theme(legend.position = 'bottom')
+
+ggsave('age_sex_DE_anova_type2.png', g_age_type2, device = 'png', width = 18, height = 10)
+ggsave('age_sex_DE_anova_type3.png', g_age_type3, device = 'png', width = 18, height = 10)
+```
+
+
+### Wald
+```{r eval=FALSE}
+out_wald <- DE_analysis(
+  cell_types = c(
+    'Tcm/Naive helper T cells',
+    'Tcm/Effector helper T cells',
+    'Tem/Trm cytotoxic T cells',
+    'DC'
+  ),
+  seurat_list = seurat_obj_filtered_mt_QC_normal_annotated,
+  patient_meta = patient_info_DE,
+  test = 'anova',
+  predictors = c('age_num', 'sex', 'age_num:sex'),
+  minimum_percent_cell_available = 0.2,
+  fdr_threshold = 0.05
+)
+```
+
+
+## DE within sample
+```{r}
+
+```
+
+## DE visualization
+```{r}
+sig_genes <- lapply(
+  out_anova,
+  function(cell) {
+    lapply(
+      cell,
+      function(gene) {
+        lapply(
+          gene,
+          function(pred) {
+            if (pred$type3$`reject?`) {
+              pred$type3[c('coefficient', 'P_val_BH')]
+            }
+          }
+        )
+      }
+    )
+  }
+)
+
+sig_genes <- lapply(
+  sig_genes,
+  function(cell) {
+    purrr::compact(cell)
+  }
+)
+
+sig_genes <- lapply(
+  sig_genes,
+  function(cell) {
+    lapply(
+      cell,
+      function(gene) {
+        purrr::compact(gene)
+      }
+    )
+  }
+)
+
+sig_genes <- lapply(
+  sig_genes,
+  function(cell) {
+    purrr::compact(cell)
+  }
+)
+
+sig_genes_sorted <- reshape2::melt(sig_genes) %>% 
+  reshape2::dcast(L1 + L3 + L2 ~ L4, value.var = 'value') %>% 
+  group_by(L1, L3) %>% 
+  arrange(P_val_BH, .by_group = TRUE) 
+
+# names()
+# 
+# age_genes_sorted <- reshape2::melt(age_genes) %>% reshape2::dcast(L1 + L2 ~ L3, value.var = 'value') %>% group_by(L1) %>% arrange(P_val_BH, .by_group = TRUE)
+```
+
+```{r}
+g_DE <- sig_genes_sorted %>% 
+  group_by(L1, L3) %>% 
+  slice_head(n = 10) %>% 
+  group_by(L1, L3) %>%
+  mutate(y_pos = 10:1) %>% 
+  ggplot(aes(x = L1, y = y_pos, fill = tanh(coefficient))) +
+  geom_raster()  +
+  geom_point(aes(size = -log10(P_val_BH))) +
+  geom_text(aes(label = L2), color = "white", size = 3.5) +
+  facet_wrap(
+    ~ L3,
+    labeller = labeller(L3 = c(
+        "age_num" = "Age",
+        "age_num:sex" = "Age:Sex",
+        "sex" = "Sex"
+      ))
+  ) +
+  scale_fill_gsea() +
+  theme_bw() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    text = element_text(size = 15, family = 'Arial', face = 'bold')
+  ) +
+  labs(
+    fill = 'tanh(LM coefficient)',
+    x = 'Cell Type',
+    y = '',
+    size = '-log10(adjusted P-value)'
+  )
+
+ggsave('DE_age_sex.png', plot = g_DE, width = 14, height = 8, dpi = 300)
+```
+
+
+:::
+
+# GSEA
+```{r}
+load('DE_anova_result.rda')
+```
+
+```{r}
+# extract f values
+age_F <- lapply(
+  out_anova,
+  function(cell) {
+    sapply(
+      cell,
+      function(gene) {
+        gene$age_num$type2$`F value`
+      }
+    )
+  }
+)
+
+sex_F <- lapply(
+  out_anova,
+  function(cell) {
+    sapply(
+      cell,
+      function(gene) {
+        gene$sex$type2$`F value`
+      }
+    )
+  }
+)
+```
+
+```{r}
+msigdb.hs <- getMsigdb(org = 'hs', id = 'SYM', version = '7.4')
+```
+
+```{r}
+gset <- lapply(
+  msigdb.hs,
+  function(cate) {
+    if (bcCategory(collectionType(cate)) == "c5" ) {
+      return(geneIds(cate))
+    }
+  }
+)
+names(gset) <- sapply(msigdb.hs, function(x) {setName(x)})
+gset <- purrr::compact(gset)
+```
+
+```{r}
+fgseaRes <- fgsea(pathways = gset, 
+                  stats = age_F$DC,
+                  minSize=15,
+                  maxSize=500,
+                  nperm=10000)
+```
+
+```{r}
+knitr::kable(head(fgseaRes[order(pval),c(1:5) ],n = 20),caption = "Top Pathways")
+```
+
+# Gene Regulatory Network
+
+# Cell Interaction Network
+```{r}
+rm(list = ls())
+load('seurat_obj_filtered_mt_QC_normal_annotated.rda')
+```
+
+```{r}
+available_patients %>% 
+  filter(age_num == 63) %>% 
+  select(`Sex:ch1`, age_num, `diagnosis:ch1`)
+
+available_patients %>% 
+  filter(age_num == 79) %>% 
+  select(`Sex:ch1`, age_num, `diagnosis:ch1`)
+```
+
+> Selected samples:
+
+* Assuming that sex has no major impact on the immune cell communications
+
+* GSM6016363
+
+* GSM6016375
+
+* GSM6016371
+
+* GSM6016397
+
+```{r}
+age_63_F_H <- createCellChat(object = seurat_obj_filtered_mt_QC_normal_annotated$GSM6016363, group.by = "cell_type")
+
+age_63_F_A <- createCellChat(object = seurat_obj_filtered_mt_QC_normal_annotated$GSM6016375, group.by = "cell_type")
+
+age_79_M_H <- createCellChat(object = seurat_obj_filtered_mt_QC_normal_annotated$GSM6016371, group.by = "cell_type")
+
+age_79_M_A <- createCellChat(object = seurat_obj_filtered_mt_QC_normal_annotated$GSM6016397, group.by = "cell_type")
+```
+
+```{r}
+CellChatDB <- CellChatDB.human # use CellChatDB.mouse if running on mouse data
+# use a subset of CellChatDB for cell-cell communication analysis
+CellChatDB.use <- subsetDB(CellChatDB, search = "Secreted Signaling") # use Secreted Signaling
+
+# set the used database in the object
+age_63_F_H@DB <- CellChatDB.use
+age_63_F_A@DB <- CellChatDB.use
+age_79_M_H@DB <- CellChatDB.use
+age_79_M_A@DB <- CellChatDB.use
+```
+
+```{r}
+# subset the expression data of signaling genes for saving computation cost
+age_63_F_H <- subsetData(age_63_F_H) 
+age_63_F_A <- subsetData(age_63_F_A) 
+age_79_M_H <- subsetData(age_79_M_H) 
+age_79_M_A <- subsetData(age_79_M_A) 
+
+age_63_F_H <- identifyOverExpressedGenes(age_63_F_H) 
+age_63_F_A <- identifyOverExpressedGenes(age_63_F_A)
+age_79_M_H <- identifyOverExpressedGenes(age_79_M_H)
+age_79_M_A <- identifyOverExpressedGenes(age_79_M_A)
+
+age_63_F_H <- identifyOverExpressedInteractions(age_63_F_H) 
+age_63_F_A <- identifyOverExpressedInteractions(age_63_F_A)
+age_79_M_H <- identifyOverExpressedInteractions(age_79_M_H)
+age_79_M_A <- identifyOverExpressedInteractions(age_79_M_A)
+```
+
+```{r}
+age_63_F_H <- computeCommunProb(age_63_F_H) 
+age_63_F_A <- computeCommunProb(age_63_F_A)
+age_79_M_H <- computeCommunProb(age_79_M_H)
+age_79_M_A <- computeCommunProb(age_79_M_A)
+```
+
+```{r}
+age_63_F_H <- filterCommunication(age_63_F_H, min.cells = 10) 
+age_63_F_A <- filterCommunication(age_63_F_A, min.cells = 10)
+age_79_M_H <- filterCommunication(age_79_M_H, min.cells = 10)
+age_79_M_A <- filterCommunication(age_79_M_A, min.cells = 10)
+```
+
+```{r}
+age_63_F_H <- computeCommunProbPathway(age_63_F_H) 
+age_63_F_A <- computeCommunProbPathway(age_63_F_A)
+age_79_M_H <- computeCommunProbPathway(age_79_M_H)
+age_79_M_A <- computeCommunProbPathway(age_79_M_A)
+```
+
+```{r}
+age_63_F_H <- aggregateNet(age_63_F_H) 
+age_63_F_A <- aggregateNet(age_63_F_A)
+age_79_M_H <- aggregateNet(age_79_M_H)
+age_79_M_A <- aggregateNet(age_79_M_A)
+```
+
+```{r}
+svg(filename = 'cell-interaction.svg')
+par(
+  mfrow = c(2, 2), 
+  mar = c(1.5, 1.5, 1.5, 1.5),
+  oma = c(0.5, 0.5, 0.5, 0.5),
+  xpd = TRUE
+)
+groupSize <- as.numeric(table(age_63_F_H@idents))
+netVisual_circle(age_63_F_H@net$weight, vertex.weight = groupSize, weight.scale = T, label.edge= F, title.name = "Healthy 63 years old female")
+groupSize <- as.numeric(table(age_63_F_A@idents))
+netVisual_circle(age_63_F_A@net$weight, vertex.weight = groupSize, weight.scale = T, label.edge= F, title.name = "CI 63 years old female")
+groupSize <- as.numeric(table(age_79_M_H@idents))
+netVisual_circle(age_79_M_H@net$weight, vertex.weight = groupSize, weight.scale = T, label.edge= F, title.name = "Healthy 79 years old male")
+groupSize <- as.numeric(table(age_79_M_A@idents))
+netVisual_circle(age_79_M_A@net$weight, vertex.weight = groupSize, weight.scale = T, label.edge= F, title.name = "CI 79 years old male")
+dev.off()
+```
+
+```{r}
+setdiff(age_63_F_A@netP$pathways, age_63_F_H@netP$pathways)
+setdiff(age_79_M_A@netP$pathways, age_79_M_H@netP$pathways)
+# setdiff(base::union(age_63_F_A@netP$pathways, age_79_M_A@netP$pathways),
+#         base::union(age_63_F_H@netP$pathways, age_79_M_H@netP$pathways))
+
+
+setdiff(age_79_M_H@netP$pathways, age_63_F_H@netP$pathways)
+setdiff(age_79_M_A@netP$pathways, age_63_F_A@netP$pathways)
+
+# setdiff(base::union(age_79_M_H@netP$pathways, age_79_M_A@netP$pathways),
+#         base::union(age_63_F_H@netP$pathways, age_63_F_A@netP$pathways))
+```
+
+```{r}
+pathway.show <- c("IL1")
+netAnalysis_contribution(age_79_M_A, signaling = pathway.show)
+```
+
+
+We observe that in the CI patients, cells communicate with some unique pathways that are not present in the healthy patients: BAFF, APRIL, and IL1.
+
+For older patients
+
+```{r}
+pathway.show <- c("BAFF", "APRIL", "IL1")
+par(mfrow=c(2,2), mar = c(2, 2, 2, 2),
+  oma = c(0.5, 0.5, 0.5, 0.5),
+  xpd = TRUE)
+netVisual_aggregate(age_63_F_A, signaling = "BAFF", layout = "circle")
+netVisual_aggregate(age_63_F_A, signaling = "PARs", layout = "circle")
+netVisual_aggregate(age_63_F_A, signaling = "APRIL", layout = "circle")
+netVisual_aggregate(age_79_M_A, signaling = "IL1", layout = "circle")
+
+
+par(mfrow=c(1,3), mar = c(1.5, 1.5, 1.5, 1.5),
+  oma = c(0.5, 0.5, 0.5, 0.5),
+  xpd = TRUE)
+netVisual_aggregate(age_79_M_H, signaling = "BAG", layout = "circle")
+netVisual_aggregate(age_79_M_A, signaling = "BAG", layout = "circle")
+netVisual_aggregate(age_79_M_A, signaling = "RESISTIN", layout = "circle")
+```
+
+```{r}
+g_T_source <- netVisual_bubble(age_63_F_A, sources.use = 12, targets.use = c(1:13), remove.isolate = FALSE)
+netVisual_chord_gene(age_63_F_A, sources.use = 12, targets.use = c(1:13), slot.name = "netP", legend.pos.x = 10)
+ggsave('t-cell-interaction.png', plot = g_T_source, dpi = 300, width = 10, height = 10)
+
+```
+
+```{r}
+age_63_F_A <- netAnalysis_computeCentrality(age_63_F_A, slot.name = "netP")
+g <- netAnalysis_signalingRole_scatter(age_63_F_A)
+ggsave('center-cells.png', plot = g, dpi = 300, width = 10, height = 10)
+```
+
