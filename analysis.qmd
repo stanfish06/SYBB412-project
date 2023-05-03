@@ -1252,32 +1252,114 @@ sex_F <- lapply(
 ```
 
 ```{r}
-msigdb.hs <- getMsigdb(org = 'hs', id = 'SYM', version = '7.4')
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(stats)
+library(DOSE)
+library(kableExtra)
 ```
 
 ```{r}
-gset <- lapply(
-  msigdb.hs,
-  function(cate) {
-    if (bcCategory(collectionType(cate)) == "c5" ) {
-      return(geneIds(cate))
-    }
+enrichGO <- lapply(
+  age_F,
+  function(cell) {
+    geneList <- sort(cell, decreasing = TRUE)
+    return(gseGO(geneList     = geneList,
+              OrgDb        = org.Hs.eg.db,
+              ont          = "CC",
+              keyType      = "SYMBOL",
+              minGSSize    = 10,
+              maxGSSize    = 500,
+              pvalueCutoff = 0.2,
+              scoreType    = 'pos',
+              verbose      = FALSE))
   }
 )
-names(gset) <- sapply(msigdb.hs, function(x) {setName(x)})
-gset <- purrr::compact(gset)
 ```
 
 ```{r}
-fgseaRes <- fgsea(pathways = gset, 
-                  stats = age_F$DC,
-                  minSize=15,
-                  maxSize=500,
-                  nperm=10000)
+disease_enrich <- lapply(
+  age_F, 
+  function(cell) {
+    geneList <- sort(cell, decreasing = TRUE)
+    enid <- select(org.Hs.eg.db, 
+       keys = names(geneList),
+       columns = c("ENTREZID"),
+       keytype = "SYMBOL")$ENTREZID
+    names(geneList) <- enid
+    geneList <- geneList[!is.na(names(geneList))]
+    return(gseDO(geneList     = geneList,
+            minGSSize     = 120,
+           pvalueCutoff  = 0.5,
+           pAdjustMethod = "BH",
+           scoreType    = 'pos',
+           verbose       = FALSE))
+  }
+)
 ```
 
 ```{r}
-knitr::kable(head(fgseaRes[order(pval),c(1:5) ],n = 20),caption = "Top Pathways")
+kegg_enrich <- lapply(
+  age_F, 
+  function(cell) {
+    geneList <- sort(cell, decreasing = TRUE)
+    enid <- select(org.Hs.eg.db, 
+       keys = names(geneList),
+       columns = c("ENTREZID"),
+       keytype = "SYMBOL")$ENTREZID
+    names(geneList) <- enid
+    geneList <- geneList[!is.na(names(geneList))]
+    return(gseMKEGG(geneList     = geneList,
+            organism     = 'hsa',
+            minGSSize     = 10,
+           pvalueCutoff  = 1,
+           pAdjustMethod = "BH",
+           scoreType    = 'pos',
+           verbose       = FALSE))
+  }
+)
+```
+
+
+```{r}
+rbind(enrichGO$`Regulatory T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Gene Ontology') %>% slice_head(n = 10), disease_enrich$`Regulatory T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Disease Gene Set')) %>% 
+  kable(booktabs = T) %>% 
+  kable_styling(htmltable_class = 'lightable-classic') %>% 
+  row_spec(11:15, color = 'red') %>% 
+  as_image(file = 'regT-GS.png', zoom = 3)
+```
+
+```{r}
+rbind(enrichGO$DC@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Gene Ontology') %>% slice_head(n = 20), disease_enrich$DC@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Disease Gene Set'),kegg_enrich$DC@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'KEGG Pathway')) %>% 
+  kable(booktabs = T) %>% 
+  kable_styling(htmltable_class = 'lightable-classic') %>% 
+  row_spec(c(13, 21:23), color = 'red') %>% 
+  as_image(file = 'DC-GS.png', zoom = 3)
+```
+
+
+```{r}
+rbind(enrichGO$`Tcm/Naive helper T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Gene Ontology') %>% slice_head(n = 20), disease_enrich$`Tcm/Naive helper T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Disease Gene Set'),kegg_enrich$`Tcm/Naive helper T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'KEGG Pathway')) %>% 
+  kable(booktabs = T) %>% 
+  kable_styling(htmltable_class = 'lightable-classic') %>% 
+  row_spec(c(12, 21:24), color = 'red') %>% 
+  as_image(file = 'HT-GS.png', zoom = 3)
+```
+
+```{r}
+rbind(enrichGO$`Tem/Trm cytotoxic T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Gene Ontology') %>% slice_head(n = 20), disease_enrich$`Tem/Trm cytotoxic T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Disease Gene Set'),kegg_enrich$`Tem/Trm cytotoxic T cells`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'KEGG Pathway')) %>% 
+  kable(booktabs = T) %>% 
+  kable_styling(htmltable_class = 'lightable-classic') %>% 
+  row_spec(c(9, 21:26), color = 'red') %>% 
+  as_image(file = 'CTT-GS.png', zoom = 3)
+```
+
+```{r}
+rbind(enrichGO$`Classical monocytes`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Gene Ontology') %>% slice_head(n = 20), disease_enrich$`Classical monocytes`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'Disease Gene Set'),kegg_enrich$`Classical monocytes`@result %>% select(ID, Description, p.adjust) %>% mutate(source = 'KEGG Pathway')) %>% 
+  kable(booktabs = T) %>% 
+  kable_styling(htmltable_class = 'lightable-classic') %>% 
+  row_spec(c(3:4, 15, 17:18, 22:29), color = 'red') %>% 
+  as_image(file = 'CM-GS.png', zoom = 3)
 ```
 
 # Gene Regulatory Network
